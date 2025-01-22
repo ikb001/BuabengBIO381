@@ -9,4 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# WEEK 3
 
+homework 3 [hw3](link to file)
