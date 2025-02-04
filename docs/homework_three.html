@@ -11,9 +11,9 @@
 
 <meta name="author" content="Isaac Buabeng" />
 
-<meta name="date" content="2025-02-01" />
+<meta name="date" content="2025-02-04" />
 
-<title>homework</title>
+<title>Homework_Three</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -265,16 +265,80 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">homework</h1>
+<h1 class="title toc-ignore">Homework_Three</h1>
 <h4 class="author">Isaac Buabeng</h4>
-<h4 class="date">2025-02-01</h4>
+<h4 class="date">2025-02-04</h4>
 
 </div>
 
 
-<div id="week-3" class="section level2">
-<h2>WEEK 3</h2>
-<p>homework 3 <a href="/BuabengBIO381/homework_three.html">link</a></p>
+<div id="regular-expression-puzzles" class="section level1">
+<h1>Regular expression Puzzles</h1>
+<p><strong>Q1. Find: “” replace: “,”</strong></p>
+<p><strong>Explanation:</strong> My goal for the regex in this question
+was to condense the columns froma dataframe into csv format by locating
+all the white spaces within the text and then condensing them by
+separating them with a comma.</p>
+<p><strong>Q2. Find: “(+), (+), ((.+)$)” replace: “\2 \1 <span
+class="math inline">\((\3)\)</span>”</strong></p>
+<p><strong>Explanation:</strong> In this case, my regex captures three
+groups: two words and the remainder of the line. The replacement
+rearranges these groups and then adds parentheses around the third
+group.</p>
+<p><strong>Q3: Find: “()” replace: “(\1)”</strong></p>
+<p><strong>Explanation:</strong> In my regex, I search for each match of
+4 consecutive digits, and then replace that sequence with a newline,
+followed by the 4 digits enclosed in parentheses.</p>
+<p>**Q4: Find: “()+(.*?)(.mp3)” replace: “\2_(\1\3)”<strong>
+</strong>Explanation:** In my regex, I search for and remove the leading
+4-digit number and whitespace from the filename, keep the song title at
+the front and then add the 4-digit number to the end of the filename
+before .mp3</p>
+<p><strong>Q5: Find: “()(?:),(+),((?:.)?),()” replace:
+“\1_\2,\4”</strong></p>
+<p><strong>Explanation:</strong> My regex for the find is designed to
+match lines with four comma-separated fields, where the first field is a
+word, the second field is a word, the third is a number (which has a
+decimal), and the fourth is an integer. I then replace the remove all
+the letters of the first word leaving only the first letters and an
+underscore separating both words. I also take out the number with a
+decimal.</p>
+<p><strong>Q6: Find: “()(?:),(),(?:.)?,()” replace:
+“\1_\2,\3”</strong></p>
+<p><strong>Explanation:</strong> My regex extracts the first letter of
+the first word, the first four letters of the second word, and the last
+numeric value from each line. I then insert an underscore infront of the
+first extracted ltter and then drop the numbers with the decimals.</p>
+<p><strong>Q7. Find: “(),(),(?:.)?,()” replace:
+“\1\2,\4,\3”</strong></p>
+<p><strong>Explanation:</strong> My regex first extracts first three
+letters of genus and species names and then extracts both numeric values
+but swaps their order.</p>
+</div>
+<div id="data-curation-using-regex" class="section level1">
+<h1>Data Curation Using REGEX</h1>
+<div id="the-pathogen_binary-column" class="section level2">
+<h2>The pathogen_binary Column</h2>
+<p>In the “pathogen_binary” column, I observe a lot of NAs instead of
+the regular binary inputs (i.e. 0s and 1s). So I decided to replace the
+NAs with 0s by using the regex: “ to search and then replaced them with
+0s.</p>
+</div>
+<div id="the-bombus_spp-and-host_spp-columns" class="section level2">
+<h2>The Bombus_spp and Host_spp Columns</h2>
+<p>I realized several irregularities in the naming convention of the
+species. There were several additional characters added to the names of
+the species. I decided to correct them by searching through the columns
+to identify all characters that are not spaces, single characters, or
+line breaks. And then removed the underscores since they are not special
+characters using the regex: “[^\w\s\r\n]” and the finding all
+underscores and then replacing them with nothing.</p>
+</div>
+<div id="the-bee_caste-column" class="section level2">
+<h2>The bee_caste column</h2>
+<p>Here the I realized that drones are referred to as “male”. I find
+them with the term “male” and then replace them with “drone”.</p>
+</div>
 </div>
 
 

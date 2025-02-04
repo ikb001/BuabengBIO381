@@ -1,5 +1,5 @@
 ---
-title: "homework_02"
+title: "homework"
 author: "Isaac Buabeng"
 date: "`r Sys.Date()`"
 output: html_document
@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# WEEK 3
 
-homework 3 [hw3](link to file)
+## WEEK 3
+
+homework 3 [link](/BuabengBIO381/homework_three.html)
