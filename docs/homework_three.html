@@ -11,7 +11,7 @@
 
 <meta name="author" content="Isaac Buabeng" />
 
-<meta name="date" content="2025-02-04" />
+<meta name="date" content="2025-02-05" />
 
 <title>Homework_Three</title>
 
@@ -267,53 +267,91 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Homework_Three</h1>
 <h4 class="author">Isaac Buabeng</h4>
-<h4 class="date">2025-02-04</h4>
+<h4 class="date">2025-02-05</h4>
 
 </div>
 
 
 <div id="regular-expression-puzzles" class="section level1">
 <h1>Regular expression Puzzles</h1>
-<p><strong>Q1. Find: “” replace: “,”</strong></p>
+<div id="question-one" class="section level2">
+<h2><strong>Question One</strong></h2>
+<pre><code>Find:\s* \s
+
+replace: ,</code></pre>
 <p><strong>Explanation:</strong> My goal for the regex in this question
-was to condense the columns froma dataframe into csv format by locating
-all the white spaces within the text and then condensing them by
-separating them with a comma.</p>
-<p><strong>Q2. Find: “(+), (+), ((.+)$)” replace: “\2 \1 <span
-class="math inline">\((\3)\)</span>”</strong></p>
+was to condense the columns from a regular dataframe into csv format by
+locating all the white spaces within the text and then condensing them
+by separating them with a comma. And so I searched for all the white
+spaces using the expression “” and then replaced them with the “,”
+sign.</p>
+</div>
+<div id="question-two" class="section level2">
+<h2><strong>Question Two</strong></h2>
+<pre><code>Find:(\w+), (\w+), ((.+)$)
+
+replace:\2 \1 \((\3)\)</code></pre>
 <p><strong>Explanation:</strong> In this case, my regex captures three
-groups: two words and the remainder of the line. The replacement
-rearranges these groups and then adds parentheses around the third
-group.</p>
-<p><strong>Q3: Find: “()” replace: “(\1)”</strong></p>
-<p><strong>Explanation:</strong> In my regex, I search for each match of
-4 consecutive digits, and then replace that sequence with a newline,
-followed by the 4 digits enclosed in parentheses.</p>
-<p>**Q4: Find: “()+(.*?)(.mp3)” replace: “\2_(\1\3)”<strong>
-</strong>Explanation:** In my regex, I search for and remove the leading
-4-digit number and whitespace from the filename, keep the song title at
-the front and then add the 4-digit number to the end of the filename
-before .mp3</p>
-<p><strong>Q5: Find: “()(?:),(+),((?:.)?),()” replace:
-“\1_\2,\4”</strong></p>
-<p><strong>Explanation:</strong> My regex for the find is designed to
-match lines with four comma-separated fields, where the first field is a
-word, the second field is a word, the third is a number (which has a
-decimal), and the fourth is an integer. I then replace the remove all
-the letters of the first word leaving only the first letters and an
-underscore separating both words. I also take out the number with a
-decimal.</p>
-<p><strong>Q6: Find: “()(?:),(),(?:.)?,()” replace:
-“\1_\2,\3”</strong></p>
-<p><strong>Explanation:</strong> My regex extracts the first letter of
-the first word, the first four letters of the second word, and the last
-numeric value from each line. I then insert an underscore infront of the
-first extracted ltter and then drop the numbers with the decimals.</p>
-<p><strong>Q7. Find: “(),(),(?:.)?,()” replace:
-“\1\2,\4,\3”</strong></p>
-<p><strong>Explanation:</strong> My regex first extracts first three
-letters of genus and species names and then extracts both numeric values
-but swaps their order.</p>
+groups: two words using the expression “(+)” and the remainder of the
+line using “((.+)$)”. The replacement rearranges these groups and then
+adds parentheses around the third group.</p>
+</div>
+<div id="question-three" class="section level2">
+<h2><strong>Question Three</strong></h2>
+<pre><code>Find:(\d{4}) 
+
+replace:\n(\1)</code></pre>
+<p><strong>My Thought Process:</strong> In my regex, I search for each
+match of 4 consecutive digits, and then replace that sequence with a
+newline, followed by the 4 digits enclosed in parentheses.</p>
+</div>
+<div id="question-four" class="section level2">
+<h2><strong>Question four</strong></h2>
+<pre><code>Find:(\d{4})\s+(.*?)(\.mp3)
+
+replace:\2_ (\1\3)</code></pre>
+<p><strong>My Thought Process:</strong> In my regex, I searched for and
+removed the leading 4-digit characters and whitespace from the filename
+using the the expression “()+(.*?)(.mp3)“, I then keep the song title at
+the front and add the 4-digit number to the end of the filename before
+.mp3 using the expression \2_(\1\3)” in the replace section.</p>
+</div>
+<div id="question-five" class="section level2">
+<h2><strong>Question five</strong></h2>
+<pre><code>Find:(\w)(?:\w*),(\w+),(\d+(?:\.\d+)?),(\d+)
+
+replace:\1_\2,\4</code></pre>
+<p><strong>My Thought Process:</strong> My regex for the find is
+designed to match lines with four comma-separated fields, where the
+first field is a word, the second field is a word, the third is a number
+(which has a decimal), and the fourth is an integer. I then replace the
+remove all the letters of the first word leaving only the first letters
+and an underscore separating both words. I also take out the number with
+a decimal.</p>
+</div>
+<div id="question-six" class="section level2">
+<h2><strong>Question Six</strong></h2>
+<pre><code>Find:(\w)(?:\w*),(\w{4})\w*,\d+(?:\.\d+)?,(\d+)$$  
+
+replace:\1_ \2,\3</code></pre>
+<p><strong>My Thought Process:</strong> My regex extracts the first
+letter of the first word, the first four letters of the second word, and
+the last numeric value from each line using the
+expression:“()(?:),(),(?:.)?,()”. I then insert an underscore infront of
+the first extracted ltter and then drop the numbers with the
+decimals.</p>
+</div>
+<div id="question-seven" class="section level2">
+<h2><strong>Question Seven</strong></h2>
+<pre><code>Find:(\w{3})\w*,(\w{3})\w*,\d+(?:\.\d+)?,(\d+)
+
+replace:\1\2,\4,\3</code></pre>
+<p><strong>My Thought Process:</strong> My regex first extracts the
+first three letters of the genus and species names using the expressions
+“(())” and then extracts both numeric values (decimal and non-decimal).
+I then do the swaps of their order using the expression
+“\1\2,\4,\3”.</p>
+</div>
 </div>
 <div id="data-curation-using-regex" class="section level1">
 <h1>Data Curation Using REGEX</h1>
@@ -336,8 +374,8 @@ underscores and then replacing them with nothing.</p>
 </div>
 <div id="the-bee_caste-column" class="section level2">
 <h2>The bee_caste column</h2>
-<p>Here the I realized that drones are referred to as “male”. I find
-them with the term “male” and then replace them with “drone”.</p>
+<p>Here the I realized that drones are referred to as “male”. I searched
+them with the term “male” and then replaced them with “drone”.</p>
 </div>
 </div>
 

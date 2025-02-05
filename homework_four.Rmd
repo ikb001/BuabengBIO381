@@ -1,0 +1,61 @@
+---
+title: "homework_four"
+author: "Isaac Buabeng"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question One
+
+#### A.
+```{r}
+z <- 1.1 ^ 2.2 ^ 3.3
+
+print(z)
+```
+
+
+#### B.
+```{r}
+z <- (1.1 ^ 2.2) ^ 3.3
+
+print(z)
+```
+
+#### C.
+```{r}
+z <- 3 * 1.1 ^ 3 + 2 * 1.1 ^ 2 + 1
+
+print(z)
+```
+
+# Question Two
+#### A.
+```{r}
+x <- c(seq(1, 7), 8, seq(7,1))
+
+print(x)
+```
+
+#### B.
+```{r}
+y <- seq(1:5)
+
+print(y)
+
+rep(x=y, times=y)
+```
+
+#### C.
+```{r}
+c <- seq(5:1)
+
+print(c)
+
+rep(x=c, times=c, each=c)
+```
+
