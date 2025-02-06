@@ -4,4 +4,4 @@ title: "My Website"
 
 Hello, Welcome!
 
-This website is meant to host work from my computional biology class. I hope you enjoy it! Let me know if you have a few suggestions about making it better!
+This website is meant to host work from my computational biology class. I hope you enjoy it! Let me know if you have a few suggestions about making it better!
