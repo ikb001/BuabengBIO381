@@ -13,7 +13,7 @@
 
 <meta name="date" content="2025-02-05" />
 
-<title>homework</title>
+<title>homework_four</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -265,20 +265,148 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">homework</h1>
+<h1 class="title toc-ignore">homework_four</h1>
 <h4 class="author">Isaac Buabeng</h4>
 <h4 class="date">2025-02-05</h4>
 
 </div>
 
 
-<div id="week-3" class="section level3">
-<h3>WEEK 3</h3>
-<p><a href="homework_three.html">Homework Three</a></p>
+<div id="question-one" class="section level1">
+<h1>Question One</h1>
+<div id="a." class="section level4">
+<h4>A.</h4>
+<pre class="r"><code>z &lt;- 1.1 ^ 2.2 ^ 3.3
+
+print(z)</code></pre>
+<pre><code>## [1] 3.61714</code></pre>
 </div>
-<div id="week-4" class="section level3">
-<h3>WEEK 4</h3>
-<p><a href="homework_four.html">Homework Four</a></p>
+<div id="b." class="section level4">
+<h4>B.</h4>
+<pre class="r"><code>z &lt;- (1.1 ^ 2.2) ^ 3.3
+
+print(z)</code></pre>
+<pre><code>## [1] 1.997611</code></pre>
+</div>
+<div id="c." class="section level4">
+<h4>C.</h4>
+<pre class="r"><code>z &lt;- 3 * 1.1 ^ 3 + 2 * 1.1 ^ 2 + 1
+
+print(z)</code></pre>
+<pre><code>## [1] 7.413</code></pre>
+</div>
+</div>
+<div id="question-two" class="section level1">
+<h1>Question Two</h1>
+<div id="a.-1" class="section level4">
+<h4>A.</h4>
+<pre class="r"><code>x &lt;- c(seq(1, 7), 8, seq(7,1))
+
+print(x)</code></pre>
+<pre><code>##  [1] 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1</code></pre>
+</div>
+<div id="b.-1" class="section level4">
+<h4>B.</h4>
+<pre class="r"><code>y &lt;- seq(1:5)
+
+print(y)</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>rep(x=y, times=y)</code></pre>
+<pre><code>##  [1] 1 2 2 3 3 3 4 4 4 4 5 5 5 5 5</code></pre>
+</div>
+<div id="c.-1" class="section level4">
+<h4>C.</h4>
+<pre class="r"><code>c &lt;- rep(5:1)
+
+print(c)</code></pre>
+<pre><code>## [1] 5 4 3 2 1</code></pre>
+<pre class="r"><code>rep(x=c, times=1:5)</code></pre>
+<pre><code>##  [1] 5 4 4 3 3 3 2 2 2 2 1 1 1 1 1</code></pre>
+</div>
+</div>
+<div id="question-three" class="section level1">
+<h1>Question Three</h1>
+<pre class="r"><code>#let&#39;s set seed so our values don&#39;t keep changing
+set.seed(10)
+
+#define x and y
+x &lt;- runif(1)
+print(x)</code></pre>
+<pre><code>## [1] 0.5074782</code></pre>
+<pre class="r"><code>y &lt;- runif(1)
+print(y)</code></pre>
+<pre><code>## [1] 0.3067685</code></pre>
+<pre class="r"><code># let&#39;s find r
+r &lt;- sqrt(x ^ 2 + y ^ 2)
+
+print(r)</code></pre>
+<pre><code>## [1] 0.5929933</code></pre>
+<pre class="r"><code># let&#39;s find theta
+theta &lt;- -asin(y/r)
+
+print(theta)</code></pre>
+<pre><code>## [1] -0.5437188</code></pre>
+</div>
+<div id="question-four" class="section level1">
+<h1>Question four</h1>
+<div id="a.-2" class="section level4">
+<h4>A.</h4>
+<pre class="r"><code>#make queue
+queue &lt;- c(&quot;sheep&quot;, &quot;fox&quot;, &quot;owl&quot;, &quot;ant&quot;)
+
+print(queue)</code></pre>
+<pre><code>## [1] &quot;sheep&quot; &quot;fox&quot;   &quot;owl&quot;   &quot;ant&quot;</code></pre>
+<pre class="r"><code>#add the serpent
+queue &lt;- c(queue, &quot;serpent&quot;)
+print(queue)</code></pre>
+<pre><code>## [1] &quot;sheep&quot;   &quot;fox&quot;     &quot;owl&quot;     &quot;ant&quot;     &quot;serpent&quot;</code></pre>
+</div>
+<div id="b.-2" class="section level4">
+<h4>B.</h4>
+<pre class="r"><code>queue &lt;- queue[-1]
+print(queue)</code></pre>
+<pre><code>## [1] &quot;fox&quot;     &quot;owl&quot;     &quot;ant&quot;     &quot;serpent&quot;</code></pre>
+</div>
+<div id="c.-2" class="section level4">
+<h4>C.</h4>
+<pre class="r"><code>queue &lt;- c(&quot;donkey&quot;, queue)
+
+print(queue)</code></pre>
+<pre><code>## [1] &quot;donkey&quot;  &quot;fox&quot;     &quot;owl&quot;     &quot;ant&quot;     &quot;serpent&quot;</code></pre>
+</div>
+<div id="d." class="section level4">
+<h4>D.</h4>
+<pre class="r"><code>queue &lt;- queue[-5]
+
+print(queue)</code></pre>
+<pre><code>## [1] &quot;donkey&quot; &quot;fox&quot;    &quot;owl&quot;    &quot;ant&quot;</code></pre>
+</div>
+<div id="e." class="section level4">
+<h4>E.</h4>
+<pre class="r"><code>queue &lt;- queue[-3]
+
+print(queue)</code></pre>
+<pre><code>## [1] &quot;donkey&quot; &quot;fox&quot;    &quot;ant&quot;</code></pre>
+</div>
+<div id="f." class="section level4">
+<h4>F.</h4>
+<pre class="r"><code>queue &lt;- c(queue[1], queue[2], &quot;aphid&quot;, queue[3])
+
+print(queue)</code></pre>
+<pre><code>## [1] &quot;donkey&quot; &quot;fox&quot;    &quot;aphid&quot;  &quot;ant&quot;</code></pre>
+</div>
+<div id="g." class="section level4">
+<h4>G.</h4>
+<pre class="r"><code>which(queue == &quot;aphid&quot;)</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+</div>
+<div id="question-5" class="section level1">
+<h1>Question 5</h1>
+<pre class="r"><code>vec &lt;- seq(1:100)
+which(!(vec %% 2 == 0 | vec %% 3 == 0 | vec %% 7 == 0))</code></pre>
+<pre><code>##  [1]  1  5 11 13 17 19 23 25 29 31 37 41 43 47 53 55 59 61 65 67 71 73 79 83 85
+## [26] 89 95 97</code></pre>
 </div>
 
 
