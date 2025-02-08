@@ -1,12 +1,19 @@
-name: "my-website"
-output_dir: docs
+name: "Isaac Buabeng"
+output_dir: "docs"
 navbar:
-  title: "My Website"
+  title: "Isaac Buabeng"
   left:
     - text: "Home"
-      href: index.html
+      href: "index.html"
     - text: "About"
-      href: about.html
+      href: "about.html"
     - text: "Homeworks"
-      href: homework_02.html
-
+      href: "homework_02.html"
+  right:
+    - icon: "fa-envelope fa-lg"
+      href: "mailto:buabengisaac154@gmail.com"
+    - icon: "fa-github fa-lg"
+      href: "http://github.com/ikb001/"
+output:
+  html_document:
+    theme: "darkly"
