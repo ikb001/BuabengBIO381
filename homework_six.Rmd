@@ -10,20 +10,20 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-**Description of Dataset**
+## Description of Dataset
 My pseudo-dataset is fashioned on variables I often encounter in my projects for my thesis work. I work with species functional traits and how those traits affect some life history activity of the species. In this case, I am making a dataset on measured traits of species within a rich fen plant community in Vermont.
 
 A "rich fen" is a type of wetland characterized by a **high concentration of minerals** in its groundwater, resulting in a diverse plant community and typically a **higher pH** compared to other fens; it is essentially a fen that is fed by mineral-rich water, usually containing **high levels of calcium**, creating a more alkaline environment compared to a "poor fen" which receives less mineral-rich water. Rich Fens typically occur on gentle slopes and have shallow peat accumulations of less than three feet, although in some cases the peat is deeper. The peat is saturated throughout the growing season, and there may be small, shallow pools scattered over the generally concave surface of the fen.
 
-Rich Fens are dominated by brown mosses and low sedges and grasses.  Characteristic mosses are starry campylium, Scorpidium revolvens, Calliergonella cuspidata, Philonotis fontana, Ptychostomum pseudotriquetrum, and Tomenthypnum nitens. The low, herbaceous cover is primarily sedges, with inland sedge, porcupine sedge, yellow sedge, and Hudson Bay bulrush present in most fens. Other characteristic herbs include bristle-stalked sedge, water avens, single-spike muhlenbergia, Kalm’s lobelia, golden ragwort, and blue flag. Many other herbaceous plants may be present. Red-osier dogwood is a shrub that occurs in most Rich Fens but is seldom very abundant. Shrubby cinquefoil and alder-leaved buckthorn are scattered across many fens, and they are locally abundant in others.
+Rich Fens are dominated by brown mosses and low sedges and grasses. Characteristic mosses are starry campylium, Scorpidium revolvens, Calliergonella cuspidata, Philonotis fontana, Ptychostomum pseudotriquetrum, and Tomenthypnum nitens. The low, herbaceous cover is primarily sedges, with inland sedge, porcupine sedge, yellow sedge, and Hudson Bay bulrush present in most fens. Other characteristic herbs include bristle-stalked sedge, water avens, single-spike muhlenbergia, Kalm’s lobelia, golden ragwort, and blue flag. Many other herbaceous plants may be present. Red-osier dogwood is a shrub that occurs in most Rich Fens but is seldom very abundant. Shrubby cinquefoil and alder-leaved buckthorn are scattered across many fens, and they are locally abundant in others.
 
-**Study Area and Design**
+### Study Area and Design
 In this study, we sampled species traits along with other environmental variables from single 2m x 2m quadrats set up in three parts of the Eshqua Bog Natural Area. One part with invasive plant species present, the second with invasives previously present but removed and the last without invasives present.
 
-**Hypothesis:**
+### Hypothesis:
 There will be a significant difference in the traits of species found within the different sites sampled and this will be influenced by the presence or absence of invasive plants within the different habitats.
 
-**Variables in my dataset**
+### Variables in my dataset:
 Names of the Sites Sampled From = site_id
 
 Names of the Species sampled = species_names
@@ -42,7 +42,7 @@ soil pH = soil_pH
 
 Calcium concentrations within the soils in the sampled quadrats = Ca_concentration
 
-**for more information about rich fen plant communities, please visit: https://vtfishandwildlife.com/conserve/conservation-planning/natural-community-fact-sheets/rich-fen#:~:text=Rich%20Fens%20are%20hotspots%20of,part%20of%20larger%20wetland%20complexes.**
+**For more information about rich fen plant communities, please visit** [ANR's website on rich fens in Vermont](https://vtfishandwildlife.com/conserve/conservation-planning/natural-community-fact-sheets/rich-fen#:~:text=Rich%20Fens%20are%20hotspots%20of,part%20of%20larger%20wetland%20complexes.)
 
 # loading necessary libraries
 ```{r libraries}
@@ -97,7 +97,7 @@ trait_data$invasive_presence <- ifelse(trait_data$species_name %in% c("Bebris th
 ```
 
 
-# visualizing our data
+# Exploring our data
 ```{r exploration}
 # let's  first make our data into a longer format
 long_data <- trait_data %>% pivot_longer(!c(site_id, species_name), names_to = "trait", values_to = "value")
@@ -135,6 +135,7 @@ plot(mod1)
 
 # Explore Sample size effects when we increase sample size by 5 each iteration 
 ```{r sample size effects 1}
+set.seed(123)
 # Set up storage for results
 results <- data.frame(sample_size = integer(),
                       effect_size = numeric(),
@@ -195,7 +196,9 @@ ggplot(results, aes(x = sample_size, y = effect_size, color = trait)) +
 
 
 # Explore Sample size effects when we increase sample size by 10 each iteration 
-```{r}
+```{r sample size effects 2}
+set.seed(123)
+
 # Set up storage for results
 results1 <- data.frame(sample_size = integer(),
                       effect_size = numeric(),

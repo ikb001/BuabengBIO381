@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Isaac Buabeng" />
+
+<meta name="date" content="2025-02-26" />
+
+<title>fake_datasets_homework</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Isaac Buabeng</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="homework_02.html">Homeworks</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:buabengisaac154@gmail.com">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/ikb001/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">fake_datasets_homework</h1>
+<h4 class="author">Isaac Buabeng</h4>
+<h4 class="date">2025-02-26</h4>
+
+</div>
+
+
+<div id="description-of-dataset" class="section level2">
+<h2>Description of Dataset</h2>
+<p>My pseudo-dataset is fashioned on variables I often encounter in my
+projects for my thesis work. I work with species functional traits and
+how those traits affect some life history activity of the species. In
+this case, I am making a dataset on measured traits of species within a
+rich fen plant community in Vermont.</p>
+<p>A “rich fen” is a type of wetland characterized by a <strong>high
+concentration of minerals</strong> in its groundwater, resulting in a
+diverse plant community and typically a <strong>higher pH</strong>
+compared to other fens; it is essentially a fen that is fed by
+mineral-rich water, usually containing <strong>high levels of
+calcium</strong>, creating a more alkaline environment compared to a
+“poor fen” which receives less mineral-rich water. Rich Fens typically
+occur on gentle slopes and have shallow peat accumulations of less than
+three feet, although in some cases the peat is deeper. The peat is
+saturated throughout the growing season, and there may be small, shallow
+pools scattered over the generally concave surface of the fen.</p>
+<p>Rich Fens are dominated by brown mosses and low sedges and grasses.
+Characteristic mosses are starry campylium, Scorpidium revolvens,
+Calliergonella cuspidata, Philonotis fontana, Ptychostomum
+pseudotriquetrum, and Tomenthypnum nitens. The low, herbaceous cover is
+primarily sedges, with inland sedge, porcupine sedge, yellow sedge, and
+Hudson Bay bulrush present in most fens. Other characteristic herbs
+include bristle-stalked sedge, water avens, single-spike muhlenbergia,
+Kalm’s lobelia, golden ragwort, and blue flag. Many other herbaceous
+plants may be present. Red-osier dogwood is a shrub that occurs in most
+Rich Fens but is seldom very abundant. Shrubby cinquefoil and
+alder-leaved buckthorn are scattered across many fens, and they are
+locally abundant in others.</p>
+<div id="study-area-and-design" class="section level3">
+<h3>Study Area and Design</h3>
+<p>In this study, we sampled species traits along with other
+environmental variables from single 2m x 2m quadrats set up in three
+parts of the Eshqua Bog Natural Area. One part with invasive plant
+species present, the second with invasives previously present but
+removed and the last without invasives present.</p>
+</div>
+<div id="hypothesis" class="section level3">
+<h3>Hypothesis:</h3>
+<p>There will be a significant difference in the traits of species found
+within the different sites sampled and this will be influenced by the
+presence or absence of invasive plants within the different
+habitats.</p>
+</div>
+<div id="variables-in-my-dataset" class="section level3">
+<h3>Variables in my dataset:</h3>
+<p>Names of the Sites Sampled From = site_id</p>
+<p>Names of the Species sampled = species_names</p>
+<p>Plant Height = plant_height</p>
+<p>Stem Width = stem_width</p>
+<p>Number of Flowers = number_of_flowers</p>
+<p>Number of Leaves = number_of_leaves</p>
+<p>Number of Fruits = number_of_fruits</p>
+<p>soil pH = soil_pH</p>
+<p>Calcium concentrations within the soils in the sampled quadrats =
+Ca_concentration</p>
+<p><strong>For more information about rich fen plant communities, please
+visit</strong> <a
+href="https://vtfishandwildlife.com/conserve/conservation-planning/natural-community-fact-sheets/rich-fen#:~:text=Rich%20Fens%20are%20hotspots%20of,part%20of%20larger%20wetland%20complexes.">ANR’s
+website on rich fens in Vermont</a></p>
+</div>
+</div>
+<div id="loading-necessary-libraries" class="section level1">
+<h1>loading necessary libraries</h1>
+<pre class="r"><code>library(skimr)
+library(gt)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div id="create-the-fake-dataset-data-simulation"
+class="section level1">
+<h1>Create the fake dataset (data simulation)</h1>
+<pre class="r"><code>site_id &lt;- c(&quot;invaded&quot;, &quot;non-invaded&quot;, &quot;removed&quot;)
+
+species_name &lt;- c(&quot;Starry campylium&quot;, &quot;Scorpidium revolvens&quot;, &quot;Calliergonella cuspidata&quot;, &quot;Bebris thunbergii&quot;, &quot;Reynoutria japonica&quot;, &quot;inland sedge&quot;, &quot;porcupine sedge&quot;, &quot;yellow sedge&quot;, &quot;bristle-stalked sedge&quot;, &quot;water avens&quot;, &quot;Philonotis fontana&quot;, &quot;Ptychostomum pseudotriquetrum&quot;, &quot;Carex schweinitzii&quot;, &quot;Eriophorum gracile&quot;, &quot;Malaxis unifolia&quot;, &quot;Elodium blandowii&quot;, &quot;Salix pedicellaris&quot;, &quot;Pyrola asarifolia ssp. asarifolia&quot;, &quot;Cladium mariscoides&quot;, &quot;Salix candida&quot;, &quot;bristle-stalked sedge&quot;, &quot;Starry campylium&quot;, &quot;Scorpidium revolvens&quot;, &quot;Reynoutria japonica&quot;, &quot;Elodium blandowii&quot;, &quot;inland sedge&quot;, &quot;yellow sedge&quot;, &quot;Malaxis unifolia&quot;, &quot;Cypripedium parviflorum var. makasin&quot;, &quot;Meesia triquetra&quot;)
+
+plant_height &lt;- c(round(rnorm(30, mean=15)))
+
+print(plant_height)</code></pre>
+<pre><code>##  [1] 16 14 14 16 17 14 16 14 16 15 15 16 14 15 17 16 16 16 16 15 15 15 16 14 14
+## [26] 14 16 14 13 14</code></pre>
+<pre class="r"><code>stem_width &lt;- c(runif(30))
+print(stem_width)</code></pre>
+<pre><code>##  [1] 0.60253796 0.52708226 0.28021359 0.48945173 0.94735991 0.68070981
+##  [7] 0.66372126 0.93954303 0.02035149 0.47131215 0.99670846 0.44271109
+## [13] 0.90752190 0.97228288 0.81420802 0.28311631 0.43709176 0.22211209
+## [19] 0.41580018 0.25040426 0.68682730 0.17128504 0.00862646 0.72237011
+## [25] 0.67490828 0.61973719 0.38395521 0.96188020 0.24510135 0.23208165</code></pre>
+<pre class="r"><code>number_of_leaves &lt;- c(round(rnorm(30, mean=15)))
+
+print(number_of_leaves)</code></pre>
+<pre><code>##  [1] 15 14 14 15 15 16 15 15 15 15 15 15 15 16 16 14 15 17 15 15 16 17 15 15 14
+## [26] 13 16 14 17 13</code></pre>
+<pre class="r"><code>number_of_flowers &lt;- c(round(rnorm(30, mean = 5)))
+print(number_of_flowers)</code></pre>
+<pre><code>##  [1] 4 7 6 5 7 6 4 5 3 5 4 5 4 5 5 5 4 3 4 6 4 5 4 5 4 4 4 5 6 4</code></pre>
+<pre class="r"><code>number_of_fruits &lt;- c(round(rnorm(30, mean=10)))
+print(number_of_fruits)</code></pre>
+<pre><code>##  [1]  8  9 12 11 10 10  9 11 12 10  9  9  7 10  9 10 10  9 10 11  9 10 10 11 10
+## [26] 10 10 11 10 10</code></pre>
+<pre class="r"><code>soil_pH &lt;- c(runif(30, max = 7.8, min = 5.8)) #this is usually the range of pH within rich fen plant communities
+print(soil_pH)</code></pre>
+<pre><code>##  [1] 6.741696 7.017547 6.729019 7.706982 6.305777 6.029610 6.209329 6.914463
+##  [9] 6.693546 6.475864 7.603180 6.567531 6.309552 6.726415 6.475401 7.695042
+## [17] 6.546912 6.291961 7.493389 7.127976 6.456126 7.322980 6.867152 6.722639
+## [25] 6.559422 6.348051 5.890628 7.508339 6.477176 6.553380</code></pre>
+<pre class="r"><code>Ca_concentration &lt;- c(runif(30))
+print(Ca_concentration)</code></pre>
+<pre><code>##  [1] 0.909290742 0.123657575 0.452643056 0.683113698 0.270712174 0.071116401
+##  [7] 0.267342538 0.584877874 0.075550153 0.329957112 0.005371399 0.286935279
+## [13] 0.304341652 0.765115626 0.105911103 0.593543548 0.429654919 0.806391772
+## [19] 0.283603792 0.147415449 0.528214771 0.426245790 0.987526774 0.124657001
+## [25] 0.805169709 0.376358838 0.342961317 0.234076811 0.078913741 0.990876052</code></pre>
+<pre class="r"><code># make the dataframe
+data.frame(site_id, species_name, plant_height, stem_width, number_of_leaves, number_of_flowers, number_of_fruits, soil_pH, Ca_concentration) -&gt; trait_data 
+  
+view(trait_data) # awesome, fake dataset created!
+
+skim(trait_data)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">trait_data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">30</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">9</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="19%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">site_id</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">species_name</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="right">36</td>
+<td align="right">0</td>
+<td align="right">22</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="20%" />
+<col width="11%" />
+<col width="15%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">plant_height</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">15.10</td>
+<td align="right">1.06</td>
+<td align="right">13.00</td>
+<td align="right">14.00</td>
+<td align="right">15.00</td>
+<td align="right">16.00</td>
+<td align="right">17.00</td>
+<td align="left">▁▇▅▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">stem_width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.54</td>
+<td align="right">0.29</td>
+<td align="right">0.01</td>
+<td align="right">0.28</td>
+<td align="right">0.51</td>
+<td align="right">0.71</td>
+<td align="right">1.00</td>
+<td align="left">▃▇▇▇▇</td>
+</tr>
+<tr class="odd">
+<td align="left">number_of_leaves</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">15.07</td>
+<td align="right">1.01</td>
+<td align="right">13.00</td>
+<td align="right">15.00</td>
+<td align="right">15.00</td>
+<td align="right">15.75</td>
+<td align="right">17.00</td>
+<td align="left">▁▂▇▂▂</td>
+</tr>
+<tr class="even">
+<td align="left">number_of_flowers</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4.73</td>
+<td align="right">1.01</td>
+<td align="right">3.00</td>
+<td align="right">4.00</td>
+<td align="right">5.00</td>
+<td align="right">5.00</td>
+<td align="right">7.00</td>
+<td align="left">▁▇▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">number_of_fruits</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9.90</td>
+<td align="right">1.06</td>
+<td align="right">7.00</td>
+<td align="right">9.00</td>
+<td align="right">10.00</td>
+<td align="right">10.00</td>
+<td align="right">12.00</td>
+<td align="left">▁▃▇▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">soil_pH</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6.75</td>
+<td align="right">0.49</td>
+<td align="right">5.89</td>
+<td align="right">6.46</td>
+<td align="right">6.63</td>
+<td align="right">6.99</td>
+<td align="right">7.71</td>
+<td align="left">▂▇▅▂▃</td>
+</tr>
+<tr class="odd">
+<td align="left">Ca_concentration</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.41</td>
+<td align="right">0.29</td>
+<td align="right">0.01</td>
+<td align="right">0.17</td>
+<td align="right">0.34</td>
+<td align="right">0.59</td>
+<td align="right">0.99</td>
+<td align="left">▇▇▅▂▅</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>summary(trait_data)</code></pre>
+<pre><code>##    site_id          species_name        plant_height    stem_width      
+##  Length:30          Length:30          Min.   :13.0   Min.   :0.008627  
+##  Class :character   Class :character   1st Qu.:14.0   1st Qu.:0.280939  
+##  Mode  :character   Mode  :character   Median :15.0   Median :0.508267  
+##                                        Mean   :15.1   Mean   :0.535700  
+##                                        3rd Qu.:16.0   3rd Qu.:0.713484  
+##                                        Max.   :17.0   Max.   :0.996708  
+##  number_of_leaves number_of_flowers number_of_fruits    soil_pH     
+##  Min.   :13.00    Min.   :3.000     Min.   : 7.0     Min.   :5.891  
+##  1st Qu.:15.00    1st Qu.:4.000     1st Qu.: 9.0     1st Qu.:6.461  
+##  Median :15.00    Median :5.000     Median :10.0     Median :6.631  
+##  Mean   :15.07    Mean   :4.733     Mean   : 9.9     Mean   :6.746  
+##  3rd Qu.:15.75    3rd Qu.:5.000     3rd Qu.:10.0     3rd Qu.:6.992  
+##  Max.   :17.00    Max.   :7.000     Max.   :12.0     Max.   :7.707  
+##  Ca_concentration  
+##  Min.   :0.005371  
+##  1st Qu.:0.169081  
+##  Median :0.336459  
+##  Mean   :0.413052  
+##  3rd Qu.:0.591377  
+##  Max.   :0.990876</code></pre>
+<pre class="r"><code># make a presence and absence column for the invasive species
+trait_data$invasive_presence &lt;- ifelse(trait_data$species_name %in% c(&quot;Bebris thunbergii&quot;, &quot;Reynoutria japonica&quot;), 1, 0)</code></pre>
+</div>
+<div id="exploring-our-data" class="section level1">
+<h1>Exploring our data</h1>
+<pre class="r"><code># let&#39;s  first make our data into a longer format
+long_data &lt;- trait_data %&gt;% pivot_longer(!c(site_id, species_name), names_to = &quot;trait&quot;, values_to = &quot;value&quot;)
+
+# visualize traits by sites in a single figure
+ggplot(data=long_data, 
+       aes(x=trait,y=value, fill=site_id))+
+  geom_boxplot() + 
+  theme_classic() + 
+  theme(axis.text.x = element_blank()) +
+  facet_wrap(trait~.,scale = &quot;free&quot;)</code></pre>
+<p><img src="homework_six_files/figure-html/exploration-1.png" width="672" /></p>
+<pre class="r"><code># looks like invasive species do leave behind an effect on the traits of species within the habitats they are found based on these boxplot. But are these real?</code></pre>
+</div>
+<div id="testing-for-differences-in-traits-across-sites-using-a-manova"
+class="section level1">
+<h1>Testing for differences in traits across sites using a MANOVA</h1>
+<pre class="r"><code>manova &lt;- manova(cbind(plant_height, stem_width, number_of_leaves, number_of_flowers, number_of_fruits) ~ site_id, data = trait_data)
+
+summary(manova) #looks like our box plots deceived us after all and our hypothesis may not be correct after all, plant traits are similar across sites regardless of the presence of invasives (p&gt;0.1899).</code></pre>
+<pre><code>##           Df  Pillai approx F num Df den Df Pr(&gt;F)
+## site_id    2 0.20833  0.55812     10     48 0.8392
+## Residuals 27</code></pre>
+</div>
+<div
+id="testing-for-the-effects-of-invasives-on-species-traits-using-a-logistic-regression-model"
+class="section level1">
+<h1>Testing for the effects of invasives on species traits using a
+logistic regression model</h1>
+<pre class="r"><code>mod1 &lt;- glm(invasive_presence ~ plant_height + stem_width + number_of_leaves + number_of_flowers + number_of_fruits, data = trait_data)
+
+summary(mod1)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = invasive_presence ~ plant_height + stem_width + 
+##     number_of_leaves + number_of_flowers + number_of_fruits, 
+##     data = trait_data)
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)       -2.801480   1.321380  -2.120   0.0445 *
+## plant_height       0.094732   0.052513   1.804   0.0838 .
+## stem_width         0.318717   0.198433   1.606   0.1213  
+## number_of_leaves  -0.001239   0.054311  -0.023   0.9820  
+## number_of_flowers  0.080031   0.055739   1.436   0.1640  
+## number_of_fruits   0.094964   0.055612   1.708   0.1006  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.08001026)
+## 
+##     Null deviance: 2.7000  on 29  degrees of freedom
+## Residual deviance: 1.9202  on 24  degrees of freedom
+## AIC: 16.674
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<pre class="r"><code>plot(mod1)</code></pre>
+<p><img src="homework_six_files/figure-html/testing%20for%20differences-1.png" width="672" /><img src="homework_six_files/figure-html/testing%20for%20differences-2.png" width="672" /><img src="homework_six_files/figure-html/testing%20for%20differences-3.png" width="672" /><img src="homework_six_files/figure-html/testing%20for%20differences-4.png" width="672" /></p>
+<pre class="r"><code># looks like our hypothesis will be rejected as there aren&#39;t any significant differences in traits across the sites irrespective of the presence of invasives. However, i wonder if the results will be the same if we increased our sample sizes.</code></pre>
+</div>
+<div
+id="explore-sample-size-effects-when-we-increase-sample-size-by-5-each-iteration"
+class="section level1">
+<h1>Explore Sample size effects when we increase sample size by 5 each
+iteration</h1>
+<pre class="r"><code>set.seed(123)
+# Set up storage for results
+results &lt;- data.frame(sample_size = integer(),
+                      effect_size = numeric(),
+                       trait = character(),
+                      p_value = numeric())
+
+# Define the traits to analyze
+traits &lt;- c(&quot;plant_height&quot;, &quot;stem_width&quot;, &quot;number_of_leaves&quot;, 
+            &quot;number_of_flowers&quot;, &quot;number_of_fruits&quot;)
+
+# randomly sample data from trait_data, and run a linear mixed effects model on them
+for (n in seq(10, nrow(trait_data), by = 5)) {  # Increase sample size by 5 each iteration
+
+  # Randomly sample n observations
+  temp_data &lt;- trait_data[sample(1:nrow(trait_data), n, replace = TRUE), ]
+
+  # Fit  logistic regression model
+  mod &lt;- glm(invasive_presence ~ plant_height + stem_width + number_of_leaves + 
+             number_of_flowers + number_of_fruits, family = binomial, data = temp_data)
+  
+  # Extract effect sizes and p-values for all traits
+  for (trait in traits) {
+    effect_size &lt;- coef(mod)[trait]
+    p_value &lt;- summary(mod)$coefficients[trait, 4]  # p-value for the trait
+
+    # Store results
+    results &lt;- rbind(results, data.frame(sample_size = n, trait = trait, 
+                                         effect_size = effect_size, p_value = p_value))
+  }
+}</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre class="r"><code>print(results) # looks like to actually detect real difference i might want to further increase sample size beyond 30 because there&#39;s nothing significant popping up. Hopefully my graphs tell a better narrative of my observations.</code></pre>
+<pre><code>##                    sample_size             trait effect_size   p_value
+## plant_height                10      plant_height  -4.8413999 0.9999816
+## stem_width                  10        stem_width  23.7547992 0.9999498
+## number_of_leaves            10  number_of_leaves  -8.7669387 0.9999599
+## number_of_flowers           10 number_of_flowers  25.2705450 0.9999072
+## number_of_fruits            10  number_of_fruits -15.4647941 0.9999651
+## plant_height1               15      plant_height   6.4972338 0.9999103
+## stem_width1                 15        stem_width  -3.3114195 0.9999891
+## number_of_leaves1           15  number_of_leaves  -6.1661863 0.9999163
+## number_of_flowers1          15 number_of_flowers  14.4106039 0.9998258
+## number_of_fruits1           15  number_of_fruits -11.4842084 0.9999283
+## plant_height2               20      plant_height  18.8044170 0.9998282
+## stem_width2                 20        stem_width  41.8362396 0.9999190
+## number_of_leaves2           20  number_of_leaves -21.4119973 0.9998314
+## number_of_flowers2          20 number_of_flowers  29.5726148 0.9997598
+## number_of_fruits2           20  number_of_fruits  29.3452039 0.9997570
+## plant_height3               25      plant_height  10.7785827 0.9998255
+## stem_width3                 25        stem_width   4.0127761 0.9999854
+## number_of_leaves3           25  number_of_leaves  -0.7299429 0.9999950
+## number_of_flowers3          25 number_of_flowers  15.8800213 0.9997929
+## number_of_fruits3           25  number_of_fruits  14.6696485 0.9998188
+## plant_height4               30      plant_height  38.8254291 0.9996085
+## stem_width4                 30        stem_width  61.0281922 0.9997894
+## number_of_leaves4           30  number_of_leaves  -0.4921539 0.9999967
+## number_of_flowers4          30 number_of_flowers   6.3491658 0.9999517
+## number_of_fruits4           30  number_of_fruits  36.6337665 0.9997283</code></pre>
+</div>
+<div
+id="visualize-the-effects-of-sample-size-on-statistical-significance-for-all-traits"
+class="section level1">
+<h1>visualize the effects of sample size on Statistical Significance for
+All Traits</h1>
+<pre class="r"><code># Plotting P-Values for Each Trait Across Sample Sizes
+ggplot(results, aes(x = sample_size, y = p_value, color = trait)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0.05, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  labs(title = &quot;Impact of Sample Size on the Statistical Significance for All Traits&quot;,
+       x = &quot;Sample Size&quot;, y = &quot;P-Value&quot;) +
+  theme_classic()</code></pre>
+<p><img src="homework_six_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code># Plotting Effect Sizes for Each Trait Across Sample Sizes
+ggplot(results, aes(x = sample_size, y = effect_size, color = trait)) +
+  geom_point() +
+  geom_line() +
+  labs(title = &quot;Effect Size vs. Sample Size for All Traits&quot;,
+       x = &quot;Sample Size&quot;, y = &quot;Effect Size (Estimate)&quot;) +
+  theme_classic()</code></pre>
+<p><img src="homework_six_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code># yep! Never lied! But mind you, this is for an increase by 5 at each iteration, what if we increased it by 10?</code></pre>
+</div>
+<div
+id="explore-sample-size-effects-when-we-increase-sample-size-by-10-each-iteration"
+class="section level1">
+<h1>Explore Sample size effects when we increase sample size by 10 each
+iteration</h1>
+<pre class="r"><code>set.seed(123)
+
+# Set up storage for results
+results1 &lt;- data.frame(sample_size = integer(),
+                      effect_size = numeric(),
+                       trait = character(),
+                      p_value = numeric())
+
+# Define the traits to analyze
+traits &lt;- c(&quot;plant_height&quot;, &quot;stem_width&quot;, &quot;number_of_leaves&quot;, 
+            &quot;number_of_flowers&quot;, &quot;number_of_fruits&quot;)
+
+# randomly sample data from trait_data, and run a linear mixed effects model on them
+for (n in seq(10, nrow(trait_data), by = 10)) {  # Increase sample size by 10 each iteration
+
+  # Randomly sample n observations
+  temp_data &lt;- trait_data[sample(1:nrow(trait_data), n, replace = TRUE), ]
+
+  # Fit  logistic regression model
+  mod1 &lt;- glm(invasive_presence ~ plant_height + stem_width + number_of_leaves + 
+             number_of_flowers + number_of_fruits, family = binomial, data = temp_data)
+  
+  # Extract effect sizes and p-values for all traits
+  for (trait in traits) {
+    effect_size1 &lt;- coef(mod1)[trait]
+    p_value1 &lt;- summary(mod1)$coefficients[trait, 4]  # p-value for the trait
+
+    # Store results
+    results1 &lt;- rbind(results, data.frame(sample_size = n, trait = trait, 
+                                         effect_size = effect_size1, p_value = p_value1))
+  }
+}</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre class="r"><code>print(results1) </code></pre>
+<pre><code>##                    sample_size             trait effect_size   p_value
+## plant_height                10      plant_height  -4.8413999 0.9999816
+## stem_width                  10        stem_width  23.7547992 0.9999498
+## number_of_leaves            10  number_of_leaves  -8.7669387 0.9999599
+## number_of_flowers           10 number_of_flowers  25.2705450 0.9999072
+## number_of_fruits            10  number_of_fruits -15.4647941 0.9999651
+## plant_height1               15      plant_height   6.4972338 0.9999103
+## stem_width1                 15        stem_width  -3.3114195 0.9999891
+## number_of_leaves1           15  number_of_leaves  -6.1661863 0.9999163
+## number_of_flowers1          15 number_of_flowers  14.4106039 0.9998258
+## number_of_fruits1           15  number_of_fruits -11.4842084 0.9999283
+## plant_height2               20      plant_height  18.8044170 0.9998282
+## stem_width2                 20        stem_width  41.8362396 0.9999190
+## number_of_leaves2           20  number_of_leaves -21.4119973 0.9998314
+## number_of_flowers2          20 number_of_flowers  29.5726148 0.9997598
+## number_of_fruits2           20  number_of_fruits  29.3452039 0.9997570
+## plant_height3               25      plant_height  10.7785827 0.9998255
+## stem_width3                 25        stem_width   4.0127761 0.9999854
+## number_of_leaves3           25  number_of_leaves  -0.7299429 0.9999950
+## number_of_flowers3          25 number_of_flowers  15.8800213 0.9997929
+## number_of_fruits3           25  number_of_fruits  14.6696485 0.9998188
+## plant_height4               30      plant_height  38.8254291 0.9996085
+## stem_width4                 30        stem_width  61.0281922 0.9997894
+## number_of_leaves4           30  number_of_leaves  -0.4921539 0.9999967
+## number_of_flowers4          30 number_of_flowers   6.3491658 0.9999517
+## number_of_fruits4           30  number_of_fruits  36.6337665 0.9997283
+## number_of_fruits5           30  number_of_fruits  36.6769487 0.9994019</code></pre>
+</div>
+<div
+id="visualize-the-effects-of-sample-size-on-statistical-significance-for-all-traits-1"
+class="section level1">
+<h1>visualize the effects of sample size on Statistical Significance for
+All Traits</h1>
+<pre class="r"><code># Plotting P-Values for Each Trait Across Sample Sizes
+ggplot(results1, aes(x = sample_size, y = p_value, color = trait)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0.05, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  labs(title = &quot;Impact of Sample Size on the Statistical Significance for All Traits&quot;,
+       x = &quot;Sample Size&quot;, y = &quot;P-Value&quot;) +
+  theme_classic()</code></pre>
+<p><img src="homework_six_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code># Plotting Effect Sizes for Each Trait Across Sample Sizes
+ggplot(results1, aes(x = sample_size, y = effect_size, color = trait)) +
+  geom_point() +
+  geom_line() +
+  labs(title = &quot;Effect Size vs. Sample Size for All Traits&quot;,
+       x = &quot;Sample Size&quot;, y = &quot;Effect Size (Estimate)&quot;) +
+  theme_classic() # don&#39;t think nothing changed!</code></pre>
+<p><img src="homework_six_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
