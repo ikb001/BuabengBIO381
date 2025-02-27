@@ -1,0 +1,258 @@
+---
+title: "fake_datasets_homework"
+author: "Isaac Buabeng"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Description of Dataset**
+My pseudo-dataset is fashioned on variables I often encounter in my projects for my thesis work. I work with species functional traits and how those traits affect some life history activity of the species. In this case, I am making a dataset on measured traits of species within a rich fen plant community in Vermont.
+
+A "rich fen" is a type of wetland characterized by a **high concentration of minerals** in its groundwater, resulting in a diverse plant community and typically a **higher pH** compared to other fens; it is essentially a fen that is fed by mineral-rich water, usually containing **high levels of calcium**, creating a more alkaline environment compared to a "poor fen" which receives less mineral-rich water. Rich Fens typically occur on gentle slopes and have shallow peat accumulations of less than three feet, although in some cases the peat is deeper. The peat is saturated throughout the growing season, and there may be small, shallow pools scattered over the generally concave surface of the fen.
+
+Rich Fens are dominated by brown mosses and low sedges and grasses.  Characteristic mosses are starry campylium, Scorpidium revolvens, Calliergonella cuspidata, Philonotis fontana, Ptychostomum pseudotriquetrum, and Tomenthypnum nitens. The low, herbaceous cover is primarily sedges, with inland sedge, porcupine sedge, yellow sedge, and Hudson Bay bulrush present in most fens. Other characteristic herbs include bristle-stalked sedge, water avens, single-spike muhlenbergia, Kalm’s lobelia, golden ragwort, and blue flag. Many other herbaceous plants may be present. Red-osier dogwood is a shrub that occurs in most Rich Fens but is seldom very abundant. Shrubby cinquefoil and alder-leaved buckthorn are scattered across many fens, and they are locally abundant in others.
+
+**Study Area and Design**
+In this study, we sampled species traits along with other environmental variables from single 2m x 2m quadrats set up in three parts of the Eshqua Bog Natural Area. One part with invasive plant species present, the second with invasives previously present but removed and the last without invasives present.
+
+**Hypothesis:**
+There will be a significant difference in the traits of species found within the different sites sampled and this will be influenced by the presence or absence of invasive plants within the different habitats.
+
+**Variables in my dataset**
+Names of the Sites Sampled From = site_id
+
+Names of the Species sampled = species_names
+
+Plant Height = plant_height
+
+Stem Width = stem_width
+
+Number of Flowers = number_of_flowers
+
+Number of Leaves = number_of_leaves
+
+Number of Fruits = number_of_fruits
+
+soil pH = soil_pH
+
+Calcium concentrations within the soils in the sampled quadrats = Ca_concentration
+
+**for more information about rich fen plant communities, please visit: https://vtfishandwildlife.com/conserve/conservation-planning/natural-community-fact-sheets/rich-fen#:~:text=Rich%20Fens%20are%20hotspots%20of,part%20of%20larger%20wetland%20complexes.**
+
+# loading necessary libraries
+```{r libraries}
+library(skimr)
+library(gt)
+library(tidyverse)
+```
+
+
+# Create the fake dataset (data simulation)
+```{r fake dataset}
+site_id <- c("invaded", "non-invaded", "removed")
+
+species_name <- c("Starry campylium", "Scorpidium revolvens", "Calliergonella cuspidata", "Bebris thunbergii", "Reynoutria japonica", "inland sedge", "porcupine sedge", "yellow sedge", "bristle-stalked sedge", "water avens", "Philonotis fontana", "Ptychostomum pseudotriquetrum", "Carex schweinitzii", "Eriophorum gracile", "Malaxis unifolia", "Elodium blandowii", "Salix pedicellaris", "Pyrola asarifolia ssp. asarifolia", "Cladium mariscoides", "Salix candida", "bristle-stalked sedge", "Starry campylium", "Scorpidium revolvens", "Reynoutria japonica", "Elodium blandowii", "inland sedge", "yellow sedge", "Malaxis unifolia", "Cypripedium parviflorum var. makasin", "Meesia triquetra")
+
+plant_height <- c(round(rnorm(30, mean=15)))
+
+print(plant_height)
+
+stem_width <- c(runif(30))
+print(stem_width)
+
+number_of_leaves <- c(round(rnorm(30, mean=15)))
+
+print(number_of_leaves)
+
+number_of_flowers <- c(round(rnorm(30, mean = 5)))
+print(number_of_flowers)
+
+number_of_fruits <- c(round(rnorm(30, mean=10)))
+print(number_of_fruits)
+
+soil_pH <- c(runif(30, max = 7.8, min = 5.8)) #this is usually the range of pH within rich fen plant communities
+print(soil_pH)
+
+Ca_concentration <- c(runif(30))
+print(Ca_concentration)
+
+
+# make the dataframe
+data.frame(site_id, species_name, plant_height, stem_width, number_of_leaves, number_of_flowers, number_of_fruits, soil_pH, Ca_concentration) -> trait_data 
+  
+view(trait_data) # awesome, fake dataset created!
+
+skim(trait_data)
+
+summary(trait_data)
+
+# make a presence and absence column for the invasive species
+trait_data$invasive_presence <- ifelse(trait_data$species_name %in% c("Bebris thunbergii", "Reynoutria japonica"), 1, 0)
+
+```
+
+
+# visualizing our data
+```{r exploration}
+# let's  first make our data into a longer format
+long_data <- trait_data %>% pivot_longer(!c(site_id, species_name), names_to = "trait", values_to = "value")
+
+# visualize traits by sites in a single figure
+ggplot(data=long_data, 
+       aes(x=trait,y=value, fill=site_id))+
+  geom_boxplot() + 
+  theme_classic() + 
+  theme(axis.text.x = element_blank()) +
+  facet_wrap(trait~.,scale = "free")
+
+# looks like invasive species do leave behind an effect on the traits of species within the habitats they are found based on these boxplot. But are these real?
+```
+
+
+# Testing for differences in traits across sites using a MANOVA
+```{r MANOVA}
+manova <- manova(cbind(plant_height, stem_width, number_of_leaves, number_of_flowers, number_of_fruits) ~ site_id, data = trait_data)
+
+summary(manova) #looks like our box plots deceived us after all and our hypothesis may not be correct after all, plant traits are similar across sites regardless of the presence of invasives (p>0.1899).
+```
+
+
+
+# Testing for the effects of invasives on species traits using a logistic regression model
+```{r testing for differences}
+mod1 <- glm(invasive_presence ~ plant_height + stem_width + number_of_leaves + number_of_flowers + number_of_fruits, data = trait_data)
+
+summary(mod1)
+
+plot(mod1)
+# looks like our hypothesis will be rejected as there aren't any significant differences in traits across the sites irrespective of the presence of invasives. However, i wonder if the results will be the same if we increased our sample sizes.
+```
+
+# Explore Sample size effects when we increase sample size by 5 each iteration 
+```{r sample size effects 1}
+# Set up storage for results
+results <- data.frame(sample_size = integer(),
+                      effect_size = numeric(),
+                       trait = character(),
+                      p_value = numeric())
+
+# Define the traits to analyze
+traits <- c("plant_height", "stem_width", "number_of_leaves", 
+            "number_of_flowers", "number_of_fruits")
+
+# randomly sample data from trait_data, and run a linear mixed effects model on them
+for (n in seq(10, nrow(trait_data), by = 5)) {  # Increase sample size by 5 each iteration
+
+  # Randomly sample n observations
+  temp_data <- trait_data[sample(1:nrow(trait_data), n, replace = TRUE), ]
+
+  # Fit  logistic regression model
+  mod <- glm(invasive_presence ~ plant_height + stem_width + number_of_leaves + 
+             number_of_flowers + number_of_fruits, family = binomial, data = temp_data)
+  
+  # Extract effect sizes and p-values for all traits
+  for (trait in traits) {
+    effect_size <- coef(mod)[trait]
+    p_value <- summary(mod)$coefficients[trait, 4]  # p-value for the trait
+
+    # Store results
+    results <- rbind(results, data.frame(sample_size = n, trait = trait, 
+                                         effect_size = effect_size, p_value = p_value))
+  }
+}
+
+print(results) # looks like to actually detect real difference i might want to further increase sample size beyond 30 because there's nothing significant popping up. Hopefully my graphs tell a better narrative of my observations.
+```
+
+
+# visualize the effects of sample size on Statistical Significance for All Traits
+```{r}
+# Plotting P-Values for Each Trait Across Sample Sizes
+ggplot(results, aes(x = sample_size, y = p_value, color = trait)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "red") +
+  labs(title = "Impact of Sample Size on the Statistical Significance for All Traits",
+       x = "Sample Size", y = "P-Value") +
+  theme_classic()
+
+
+# Plotting Effect Sizes for Each Trait Across Sample Sizes
+ggplot(results, aes(x = sample_size, y = effect_size, color = trait)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Effect Size vs. Sample Size for All Traits",
+       x = "Sample Size", y = "Effect Size (Estimate)") +
+  theme_classic()
+
+# yep! Never lied! But mind you, this is for an increase by 5 at each iteration, what if we increased it by 10?
+```
+
+
+# Explore Sample size effects when we increase sample size by 10 each iteration 
+```{r}
+# Set up storage for results
+results1 <- data.frame(sample_size = integer(),
+                      effect_size = numeric(),
+                       trait = character(),
+                      p_value = numeric())
+
+# Define the traits to analyze
+traits <- c("plant_height", "stem_width", "number_of_leaves", 
+            "number_of_flowers", "number_of_fruits")
+
+# randomly sample data from trait_data, and run a linear mixed effects model on them
+for (n in seq(10, nrow(trait_data), by = 10)) {  # Increase sample size by 10 each iteration
+
+  # Randomly sample n observations
+  temp_data <- trait_data[sample(1:nrow(trait_data), n, replace = TRUE), ]
+
+  # Fit  logistic regression model
+  mod1 <- glm(invasive_presence ~ plant_height + stem_width + number_of_leaves + 
+             number_of_flowers + number_of_fruits, family = binomial, data = temp_data)
+  
+  # Extract effect sizes and p-values for all traits
+  for (trait in traits) {
+    effect_size1 <- coef(mod1)[trait]
+    p_value1 <- summary(mod1)$coefficients[trait, 4]  # p-value for the trait
+
+    # Store results
+    results1 <- rbind(results, data.frame(sample_size = n, trait = trait, 
+                                         effect_size = effect_size1, p_value = p_value1))
+  }
+}
+
+print(results1) 
+```
+
+
+
+# visualize the effects of sample size on Statistical Significance for All Traits
+```{r}
+# Plotting P-Values for Each Trait Across Sample Sizes
+ggplot(results1, aes(x = sample_size, y = p_value, color = trait)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "red") +
+  labs(title = "Impact of Sample Size on the Statistical Significance for All Traits",
+       x = "Sample Size", y = "P-Value") +
+  theme_classic()
+
+
+# Plotting Effect Sizes for Each Trait Across Sample Sizes
+ggplot(results1, aes(x = sample_size, y = effect_size, color = trait)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Effect Size vs. Sample Size for All Traits",
+       x = "Sample Size", y = "Effect Size (Estimate)") +
+  theme_classic() # don't think nothing changed!
+```
+
+
+
+
