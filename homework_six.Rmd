@@ -47,7 +47,6 @@ Calcium concentrations within the soils in the sampled quadrats = Ca_concentrati
 # loading necessary libraries
 ```{r libraries}
 library(skimr)
-library(gt)
 library(tidyverse)
 ```
 
@@ -99,7 +98,9 @@ trait_data$invasive_presence <- ifelse(trait_data$species_name %in% c("Bebris th
 
 # Exploring our data
 ```{r exploration}
-# let's  first make our data into a longer format
+# The most basic thing you could when exploring your data would be some kind of box plots (depending on your type of data of course!), so that what i'll do in this case. But first;
+
+# let's convert our data into a longer format
 long_data <- trait_data %>% pivot_longer(!c(site_id, species_name), names_to = "trait", values_to = "value")
 
 # visualize traits by sites in a single figure
@@ -110,7 +111,7 @@ ggplot(data=long_data,
   theme(axis.text.x = element_blank()) +
   facet_wrap(trait~.,scale = "free")
 
-# looks like invasive species do leave behind an effect on the traits of species within the habitats they are found based on these boxplot. But are these real?
+# looks like invasive species do leave behind an effect on the traits of species within the habitats they are found based on these box plots. But are these real differences? We will have to test our data for actual differences.
 ```
 
 
