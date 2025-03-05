@@ -86,10 +86,10 @@ replace:\1\2,\4,\3
 # Data Curation Using REGEX
 
 ## The pathogen_binary Column
-In the “pathogen_binary” column, I observe a lot of NAs instead of the regular binary inputs (i.e. 0s and 1s). So I decided to replace the NAs with 0s by using the regex: "\bNA\b" to search and then replaced them with 0s. 
+In the “pathogen_binary” column, I observe a lot of NAs instead of the regular binary inputs (i.e. 0s and 1s). So I decided to replace the NAs with 0s by using the **regex: "\bNA\b" to search and then replaced them with 0s**. 
 
 ## The Bombus_spp and Host_spp Columns
-I realized several irregularities in the naming convention of the species. There were several additional characters added to the names of the species. I decided to correct them by searching through the columns to identify all characters that are not spaces, single characters, or line breaks. And then removed the underscores since they are not special characters using the regex: "[^\w\s\r\n]" and the finding all underscores and then replacing them with nothing.
+I realized several irregularities in the naming convention of the species. There were several additional characters added to the names of the species. I decided to correct them by searching through the columns to identify all characters that are not spaces, single characters, or line breaks. And then removed the underscores since they are not special characters using the **regex: "[^\w\s\r\n]" and the finding all underscores and then replacing them with nothing**.
 
 ## The bee_caste column
-Here the I realized that drones are referred to as "male". I searched them with the term "male" and then replaced them with "drone". 
+Here the I realized that there were white spaces along with "drones" being referred to as "male". I took out the whitespaces using the **regex:(worker|male)\s* and then replacing them with :\1\t**, which should capture “worker” OR “male” in the bee_caste column using a *|* and then match and remove the excess spaces following the words and replace it with a uniform tab. I also searched the term "male" and then replaced them with "drone". 
