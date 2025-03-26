@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Isaac Buabeng" />
+
+<meta name="date" content="2025-03-26" />
+
+<title>homework_eight</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Isaac Buabeng</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="homework_02.html">Homeworks</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:buabengisaac154@gmail.com">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/ikb001/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">homework_eight</h1>
+<h4 class="author">Isaac Buabeng</h4>
+<h4 class="date">2025-03-26</h4>
+
+</div>
+
+
+<div id="acknowlegements-and-data-use-permissions"
+class="section level1">
+<h1>Acknowlegements and Data Use Permissions</h1>
+<p>The dataset used for this homework was focused on the number of
+active daily covid-19 cases recorded in 2020 across Ghana and was
+sourced from <a
+href="https://www.kaggle.com/datasets/sammyhawkrad/ghana-covid19-dataset">google
+kaggle</a>, with subsequent source permissions from the <a
+href="http://www.moh-ghana.org/">Ministry of Health, Ghana</a></p>
+</div>
+<div id="loading-in-the-necessary-libraries" class="section level1">
+<h1>loading in the necessary libraries</h1>
+<pre class="r"><code>library(ggplot2) # for graphics
+library(MASS) # for maximum likelihood estimation</code></pre>
+<pre><code>## Warning: package &#39;MASS&#39; was built under R version 4.4.3</code></pre>
+<pre class="r"><code>library(skimr) # for inspecting our data</code></pre>
+</div>
+<div id="load-in-the-dataset-and-inspect-it" class="section level1">
+<h1>load in the dataset and inspect it</h1>
+<pre class="r"><code>data &lt;- read.table(&quot;Ghana_Covid19_DailyActive.csv&quot;,header=TRUE, sep=&quot;,&quot;, fill=TRUE, quote=&quot;&quot;)
+
+str(data) # checking the structure of the dataframe</code></pre>
+<pre><code>## &#39;data.frame&#39;:    233 obs. of  8 variables:
+##  $ confirmed           : int  2 2 2 1 2 2 5 3 3 3 ...
+##  $ recovered           : int  0 0 0 0 0 0 0 2 0 0 ...
+##  $ death               : int  0 0 0 0 0 0 0 1 1 0 ...
+##  $ date                : chr  &quot;03/12/2020&quot; &quot;03/13/2020&quot; &quot;03/14/2020&quot; &quot;03/17/2020&quot; ...
+##  $ cumulative_confirmed: int  2 4 6 7 9 11 16 19 22 25 ...
+##  $ cumulative_recovered: int  0 0 0 0 0 0 0 2 2 2 ...
+##  $ cumulative_death    : int  0 0 0 0 0 0 0 1 2 2 ...
+##  $ active_cases        : int  2 4 6 7 9 11 16 16 18 21 ...</code></pre>
+<pre class="r"><code>skim(data) # inspecting the dataframe</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">233</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="19%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">date</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">233</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="22%" />
+<col width="10%" />
+<col width="14%" />
+<col width="9%" />
+<col width="9%" />
+<col width="3%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">confirmed</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">221.75</td>
+<td align="right">241.39</td>
+<td align="right">1</td>
+<td align="right">59</td>
+<td align="right">131</td>
+<td align="right">295</td>
+<td align="right">1513</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">recovered</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">216.94</td>
+<td align="right">441.66</td>
+<td align="right">0</td>
+<td align="right">32</td>
+<td align="right">97</td>
+<td align="right">221</td>
+<td align="right">5526</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">death</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.39</td>
+<td align="right">2.57</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">cumulative_confirmed</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">28642.17</td>
+<td align="right">19231.47</td>
+<td align="right">2</td>
+<td align="right">8070</td>
+<td align="right">35501</td>
+<td align="right">46626</td>
+<td align="right">51667</td>
+<td align="left">▅▂▂▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">cumulative_recovered</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">26223.44</td>
+<td align="right">20028.78</td>
+<td align="right">0</td>
+<td align="right">2947</td>
+<td align="right">32096</td>
+<td align="right">45757</td>
+<td align="right">50547</td>
+<td align="left">▆▂▁▂▇</td>
+</tr>
+<tr class="even">
+<td align="left">cumulative_death</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">174.39</td>
+<td align="right">124.10</td>
+<td align="right">0</td>
+<td align="right">36</td>
+<td align="right">182</td>
+<td align="right">301</td>
+<td align="right">323</td>
+<td align="left">▆▂▂▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">active_cases</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2244.34</td>
+<td align="right">2066.14</td>
+<td align="right">2</td>
+<td align="right">524</td>
+<td align="right">1384</td>
+<td align="right">3782</td>
+<td align="right">8585</td>
+<td align="left">▇▂▃▁▁</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>summary(data) # inspecting the dataframe</code></pre>
+<pre><code>##    confirmed        recovered          death            date          
+##  Min.   :   1.0   Min.   :   0.0   Min.   : 0.000   Length:233        
+##  1st Qu.:  59.0   1st Qu.:  32.0   1st Qu.: 0.000   Class :character  
+##  Median : 131.0   Median :  97.0   Median : 0.000   Mode  :character  
+##  Mean   : 221.7   Mean   : 216.9   Mean   : 1.386                     
+##  3rd Qu.: 295.0   3rd Qu.: 221.0   3rd Qu.: 2.000                     
+##  Max.   :1513.0   Max.   :5526.0   Max.   :15.000                     
+##  cumulative_confirmed cumulative_recovered cumulative_death  active_cases 
+##  Min.   :    2        Min.   :    0        Min.   :  0.0    Min.   :   2  
+##  1st Qu.: 8070        1st Qu.: 2947        1st Qu.: 36.0    1st Qu.: 524  
+##  Median :35501        Median :32096        Median :182.0    Median :1384  
+##  Mean   :28642        Mean   :26223        Mean   :174.4    Mean   :2244  
+##  3rd Qu.:46626        3rd Qu.:45757        3rd Qu.:301.0    3rd Qu.:3782  
+##  Max.   :51667        Max.   :50547        Max.   :323.0    Max.   :8585</code></pre>
+<pre class="r"><code>print(data)</code></pre>
+<pre><code>##     confirmed recovered death       date cumulative_confirmed
+## 1           2         0     0 03/12/2020                    2
+## 2           2         0     0 03/13/2020                    4
+## 3           2         0     0 03/14/2020                    6
+## 4           1         0     0 03/17/2020                    7
+## 5           2         0     0 03/18/2020                    9
+## 6           2         0     0 03/19/2020                   11
+## 7           5         0     0 03/20/2020                   16
+## 8           3         2     1 03/21/2020                   19
+## 9           3         0     1 03/22/2020                   22
+## 10          3         0     0 03/23/2020                   25
+## 11         26         0     0 03/24/2020                   51
+## 12         15         0     0 03/25/2020                   66
+## 13         64         0     1 03/26/2020                  130
+## 14          5         0     1 03/27/2020                  135
+## 15          6         0     1 03/28/2020                  141
+## 16         11         0     0 03/29/2020                  152
+## 17          9         1     0 03/31/2020                  161
+## 18         34         0     0 04/01/2020                  195
+## 19          9         0     0 04/02/2020                  204
+## 20          1         0     0 04/03/2020                  205
+## 21          9         0     0 04/04/2020                  214
+## 22         73         0     0 04/06/2020                  287
+## 23         26         0     0 04/07/2020                  313
+## 24         65         1     1 04/09/2020                  378
+## 25         30         0     2 04/10/2020                  408
+## 26        158         0     0 04/11/2020                  566
+## 27         70        79     0 04/14/2020                  636
+## 28          5         0     0 04/15/2020                  641
+## 29        193        16     1 04/18/2020                  834
+## 30        208         0     0 04/19/2020                 1042
+## 31        237        35     1 04/22/2020                 1279
+## 32        271        21     1 04/25/2020                 1550
+## 33        121        33     5 04/27/2020                 1671
+## 34        403        24     1 04/28/2020                 2074
+## 35         95        17     1 05/01/2020                 2169
+## 36        550        65     0 05/02/2020                 2719
+## 37        372         9     0 05/04/2020                 3091
+## 38        921        20     0 05/07/2020                 4012
+## 39        251        55     4 05/08/2020                 4263
+## 40        437       116     0 05/10/2020                 4700
+## 41        427         0     0 05/11/2020                 5127
+## 42        281        20     2 05/12/2020                 5408
+## 43        122       160     0 05/13/2020                 5530
+## 44        108       786     4 05/14/2020                 5638
+## 45         97       294     1 05/15/2020                 5735
+## 46        183         0     2 05/17/2020                 5918
+## 47        178        19     0 05/18/2020                 6096
+## 48        173       125     0 05/19/2020                 6269
+## 49        217        53     0 05/20/2020                 6486
+## 50        131        27     0 05/21/2020                 6617
+## 51         66        20     1 05/22/2020                 6683
+## 52        125        72     0 05/23/2020                 6808
+## 53        156        27     0 05/24/2020                 6964
+## 54        153       220     2 05/25/2020                 7117
+## 55        186        95     0 05/26/2020                 7303
+## 56        313         9     0 05/27/2020                 7616
+## 57        152       119     1 05/28/2020                 7768
+## 58        113       301     1 05/29/2020                 7881
+## 59        189       106     0 05/30/2020                 8070
+## 60        227        39     2 05/31/2020                 8297
+## 61        251       146     0 06/01/2020                 8548
+## 62        337        57     0 06/02/2020                 8885
+## 63        283       268     4 06/03/2020                 9168
+## 64        294        90     2 06/04/2020                 9462
+## 65        176        89     0 06/05/2020                 9638
+## 66        272         9     4 06/06/2020                 9910
+## 67        291       110     0 06/07/2020                10201
+## 68        157        69     0 06/08/2020                10358
+## 69        498        97     0 06/09/2020                10856
+## 70        262        58     0 06/10/2020                11118
+## 71        304       177     3 06/11/2020                11422
+## 72        295       102     3 06/12/2020                11717
+## 73        247         0     0 06/13/2020                11964
+## 74        229        68     4 06/14/2020                12193
+## 75        397        84     8 06/15/2020                12590
+## 76        339        58     0 06/16/2020                12929
+## 77        274        80     4 06/17/2020                13203
+## 78        514      5526    15 06/18/2020                13717
+## 79        290       399     0 06/19/2020                14007
+## 80        147         0     0 06/20/2020                14154
+## 81        414       434    10 06/21/2020                14568
+## 82        445       171     0 06/22/2020                15013
+## 83        460       353     0 06/23/2020                15473
+## 84        361       324     8 06/24/2020                15834
+## 85        597       502     0 06/25/2020                16431
+## 86        311       463     9 06/26/2020                16742
+## 87        609       274     0 06/27/2020                17351
+## 88        390       274     0 06/28/2020                17741
+## 89        393       282     5 06/29/2020                18134
+## 90       1254       780     0 07/01/2020                19388
+## 91        697       540     5 07/02/2020                20085
+## 92        992      1200     7 07/03/2020                21077
+## 93        891      1086     0 07/04/2020                21968
+## 94        854       408     0 07/05/2020                22822
+## 95        641      1058     0 07/06/2020                23463
+## 96        371       590     6 07/07/2020                23834
+## 97        414       619     0 07/08/2020                24248
+## 98        270       356     4 07/09/2020                24518
+## 99        470       880     0 07/10/2020                24988
+## 100       264       330     0 07/11/2020                25252
+## 101       178       114     0 07/12/2020                25430
+## 102       695       759     0 07/13/2020                26125
+## 103       447       645     5 07/14/2020                26572
+## 104       488       129     1 07/15/2020                27060
+## 105       607       205     3 07/16/2020                27667
+## 106       763      1652     5 07/17/2020                28430
+## 107       559       430     0 07/18/2020                28989
+## 108       683       759     0 07/19/2020                29672
+## 109       694       597     0 07/20/2020                30366
+## 110       691      1114     8 07/21/2020                31057
+## 111       794       637     0 07/22/2020                31851
+## 112       586       489     0 07/23/2020                32437
+## 113       532       567     7 07/24/2020                32969
+## 114       655       307     0 07/25/2020                33624
+## 115       782       820     0 07/26/2020                34406
+## 116       736       665     7 07/27/2020                35142
+## 117       359       810     7 07/28/2020                35501
+## 118      1513      1269     0 07/30/2020                37014
+## 119       798       948     9 07/31/2020                37812
+## 120       689       469     0 08/01/2020                38501
+## 121       574       781     8 08/02/2020                39075
+## 122       567       821     0 08/03/2020                39642
+## 123       455       254     7 08/04/2020                40097
+## 124       436      1064     0 08/05/2020                40533
+## 125       470       628     9 08/06/2020                41003
+## 126       209       397     0 08/07/2020                41212
+## 127       192       328     0 08/08/2020                41404
+## 128       168       265     8 08/09/2020                41572
+## 129       153       175     0 08/10/2020                41725
+## 130       122       223     0 08/11/2020                41847
+## 131       216       275     8 08/12/2020                42063
+## 132       147       154     0 08/13/2020                42210
+## 133       322       215     0 08/14/2020                42532
+## 134       121       205     8 08/15/2020                42653
+## 135       340       229     9 08/16/2020                42993
+## 136        83       167     8 08/17/2020                43076
+## 137       184       313     5 08/18/2020                43260
+## 138        65       132     0 08/19/2020                43325
+## 139       180       124     0 08/20/2020                43505
+## 140       117       163     2 08/21/2020                43622
+## 141        95       148     7 08/22/2020                43717
+## 142        52       205     0 08/23/2020                43769
+## 143        72       198     0 08/24/2020                43841
+## 144       108       146     0 08/25/2020                43949
+## 145       169       189     0 08/26/2020                44118
+## 146        87       196     6 08/27/2020                44205
+## 147       255       344     0 08/29/2020                44460
+## 148       157       232     0 08/30/2020                44617
+## 149        41       125     0 08/31/2020                44658
+## 150        55        99     4 09/01/2020                44713
+## 151        64       116     3 09/02/2020                44777
+## 152        92       108     0 09/03/2020                44869
+## 153       143        97     0 09/04/2020                45012
+## 154       176       144     0 09/05/2020                45188
+## 155       125       146     0 09/06/2020                45313
+## 156        75        79     2 09/07/2020                45388
+## 157        46        75     1 09/08/2020                45434
+## 158        59       129     3 09/09/2020                45493
+## 159        79       170     3 09/10/2020                45572
+## 160        29        38     2 09/11/2020                45601
+## 161        54       118     0 09/12/2020                45655
+## 162        59        99     0 09/13/2020                45714
+## 163        46        77     1 09/14/2020                45760
+## 164        97        56     0 09/15/2020                45857
+## 165        20        52     2 09/16/2020                45877
+## 166       127        72     0 09/17/2020                46004
+## 167        58       105     0 09/18/2020                46062
+## 168        54        32     0 09/19/2020                46116
+## 169        37         9     2 09/20/2020                46153
+## 170        69       118     0 09/21/2020                46222
+## 171       131       160     0 09/22/2020                46353
+## 172        34        41     0 09/23/2020                46387
+## 173        57        28     0 09/24/2020                46444
+## 174        38         5     2 09/25/2020                46482
+## 175       144       106     0 09/26/2020                46626
+## 176        30       185     0 09/27/2020                46656
+## 177        38         3     0 09/28/2020                46694
+## 178        74        19     0 09/29/2020                46768
+## 179        35        42     2 09/30/2020                46803
+## 180        26        54     0 10/01/2020                46829
+## 181        76       163     3 10/03/2020                46905
+## 182        42        36     0 10/04/2020                46947
+## 183        17        51     0 10/05/2020                46964
+## 184        23        68     0 10/06/2020                46987
+## 185        18        20     0 10/07/2020                47005
+## 186        25        26     2 10/08/2020                47030
+## 187        67        28     0 10/09/2020                47097
+## 188        29        17     2 10/10/2020                47126
+## 189        25        21     0 10/11/2020                47151
+## 190        22        37     0 10/12/2020                47173
+## 191        26        14     0 10/13/2020                47199
+## 192        33        37     0 10/14/2020                47232
+## 193        78        40     0 10/15/2020                47310
+## 194        62        46     0 10/16/2020                47372
+## 195        89        88     2 10/17/2020                47461
+## 196        77        37     0 10/18/2020                47538
+## 197        63        35     2 10/19/2020                47601
+## 198        48        32     0 10/20/2020                47649
+## 199        41        31     2 10/21/2020                47690
+## 200        55        32     0 10/22/2020                47745
+## 201        30        52     0 10/23/2020                47775
+## 202       216       165     4 10/26/2020                47991
+## 203        64        33     0 10/27/2020                48055
+## 204        69        46     0 10/28/2020                48124
+## 205        76        45     0 10/29/2020                48200
+## 206       311       112     0 10/31/2020                48511
+## 207       132        74     0 11/01/2020                48643
+## 208       145        75     0 11/02/2020                48788
+## 209       116        90     0 11/03/2020                48904
+## 210       100        55     0 11/04/2020                49004
+## 211       198        60     0 11/05/2020                49202
+## 212       100       117     0 11/06/2020                49302
+## 213       270       102     0 11/07/2020                49572
+## 214       236        74     0 11/08/2020                49808
+## 215       149        77     0 11/09/2020                49957
+## 216        61        83     0 11/10/2020                50018
+## 217       105       149     2 11/11/2020                50123
+## 218        81       232     1 11/12/2020                50204
+## 219       172        66     0 11/13/2020                50376
+## 220        81        84     0 11/14/2020                50457
+## 221       102       172     0 11/15/2020                50559
+## 222        72       221     0 11/16/2020                50631
+## 223        86       178     0 11/17/2020                50717
+## 224       157       124     0 11/18/2020                50874
+## 225        67       194     0 11/19/2020                50941
+## 226       153       232     0 11/20/2020                51094
+## 227        90       198     0 11/21/2020                51184
+## 228        41        98     0 11/22/2020                51225
+## 229        49        78     0 11/23/2020                51274
+## 230       105        93     0 11/24/2020                51379
+## 231        97        60     0 11/25/2020                51476
+## 232        93        92     0 11/26/2020                51569
+## 233        98        97     0 11/27/2020                51667
+##     cumulative_recovered cumulative_death active_cases
+## 1                      0                0            2
+## 2                      0                0            4
+## 3                      0                0            6
+## 4                      0                0            7
+## 5                      0                0            9
+## 6                      0                0           11
+## 7                      0                0           16
+## 8                      2                1           16
+## 9                      2                2           18
+## 10                     2                2           21
+## 11                     2                2           47
+## 12                     2                2           62
+## 13                     2                3          125
+## 14                     2                4          129
+## 15                     2                5          134
+## 16                     2                5          145
+## 17                     3                5          153
+## 18                     3                5          187
+## 19                     3                5          196
+## 20                     3                5          197
+## 21                     3                5          206
+## 22                     3                5          279
+## 23                     3                5          305
+## 24                     4                6          368
+## 25                     4                8          396
+## 26                     4                8          554
+## 27                    83                8          545
+## 28                    83                8          550
+## 29                    99                9          726
+## 30                    99                9          934
+## 31                   134               10         1135
+## 32                   155               11         1384
+## 33                   188               16         1467
+## 34                   212               17         1845
+## 35                   229               18         1922
+## 36                   294               18         2407
+## 37                   303               18         2770
+## 38                   323               18         3671
+## 39                   378               22         3863
+## 40                   494               22         4184
+## 41                   494               22         4611
+## 42                   514               24         4870
+## 43                   674               24         4832
+## 44                  1460               28         4150
+## 45                  1754               29         3952
+## 46                  1754               31         4133
+## 47                  1773               31         4292
+## 48                  1898               31         4340
+## 49                  1951               31         4504
+## 50                  1978               31         4608
+## 51                  1998               32         4653
+## 52                  2070               32         4706
+## 53                  2097               32         4835
+## 54                  2317               34         4766
+## 55                  2412               34         4857
+## 56                  2421               34         5161
+## 57                  2540               35         5193
+## 58                  2841               36         5004
+## 59                  2947               36         5087
+## 60                  2986               38         5273
+## 61                  3132               38         5378
+## 62                  3189               38         5658
+## 63                  3457               42         5669
+## 64                  3547               44         5871
+## 65                  3636               44         5958
+## 66                  3645               48         6217
+## 67                  3755               48         6398
+## 68                  3824               48         6486
+## 69                  3921               48         6887
+## 70                  3979               48         7091
+## 71                  4156               51         7215
+## 72                  4258               54         7405
+## 73                  4258               54         7652
+## 74                  4326               58         7809
+## 75                  4410               66         8114
+## 76                  4468               66         8395
+## 77                  4548               70         8585
+## 78                 10074               85         3558
+## 79                 10473               85         3449
+## 80                 10473               85         3596
+## 81                 10907               95         3566
+## 82                 11078               95         3840
+## 83                 11431               95         3947
+## 84                 11755              103         3976
+## 85                 12257              103         4071
+## 86                 12720              112         3910
+## 87                 12994              112         4245
+## 88                 13268              112         4361
+## 89                 13550              117         4467
+## 90                 14330              117         4941
+## 91                 14870              122         5093
+## 92                 16070              129         4878
+## 93                 17156              129         4683
+## 94                 17564              129         5129
+## 95                 18622              129         4712
+## 96                 19212              135         4487
+## 97                 19831              135         4282
+## 98                 20187              139         4192
+## 99                 21067              139         3782
+## 100                21397              139         3716
+## 101                21511              139         3780
+## 102                22270              139         3716
+## 103                22915              144         3513
+## 104                23044              145         3871
+## 105                23249              148         4270
+## 106                24901              153         3376
+## 107                25331              153         3505
+## 108                26090              153         3429
+## 109                26687              153         3526
+## 110                27801              161         3095
+## 111                28438              161         3252
+## 112                28927              161         3349
+## 113                29494              168         3307
+## 114                29801              168         3655
+## 115                30621              168         3617
+## 116                31286              175         3681
+## 117                32096              182         3223
+## 118                33365              182         3467
+## 119                34313              191         3308
+## 120                34782              191         3528
+## 121                35563              199         3313
+## 122                36384              199         3059
+## 123                36638              206         3253
+## 124                37702              206         2625
+## 125                38330              215         2458
+## 126                38727              215         2270
+## 127                39055              215         2134
+## 128                39320              223         2029
+## 129                39495              223         2007
+## 130                39718              223         1906
+## 131                39993              231         1839
+## 132                40147              231         1832
+## 133                40362              231         1939
+## 134                40567              239         1847
+## 135                40796              248         1949
+## 136                40963              256         1857
+## 137                41276              261         1723
+## 138                41408              261         1656
+## 139                41532              261         1712
+## 140                41695              263         1664
+## 141                41843              270         1604
+## 142                42048              270         1451
+## 143                42246              270         1325
+## 144                42392              270         1287
+## 145                42581              270         1267
+## 146                42777              276         1152
+## 147                43121              276         1063
+## 148                43353              276          988
+## 149                43478              276          904
+## 150                43577              280          856
+## 151                43693              283          801
+## 152                43801              283          785
+## 153                43898              283          831
+## 154                44042              283          863
+## 155                44188              283          842
+## 156                44267              285          836
+## 157                44342              286          806
+## 158                44471              289          733
+## 159                44641              292          639
+## 160                44679              294          628
+## 161                44797              294          564
+## 162                44896              294          524
+## 163                44973              295          492
+## 164                45029              295          533
+## 165                45081              297          499
+## 166                45153              297          554
+## 167                45258              297          507
+## 168                45290              297          529
+## 169                45299              299          555
+## 170                45417              299          506
+## 171                45577              299          477
+## 172                45618              299          470
+## 173                45646              299          499
+## 174                45651              301          530
+## 175                45757              301          568
+## 176                45942              301          413
+## 177                45945              301          448
+## 178                45964              301          503
+## 179                46006              303          494
+## 180                46060              303          466
+## 181                46223              306          376
+## 182                46259              306          382
+## 183                46310              306          348
+## 184                46378              306          303
+## 185                46398              306          301
+## 186                46424              308          298
+## 187                46452              308          337
+## 188                46469              310          347
+## 189                46490              310          351
+## 190                46527              310          336
+## 191                46541              310          348
+## 192                46578              310          344
+## 193                46618              310          382
+## 194                46664              310          398
+## 195                46752              312          397
+## 196                46789              312          437
+## 197                46824              314          463
+## 198                46856              314          479
+## 199                46887              316          487
+## 200                46919              316          510
+## 201                46971              316          488
+## 202                47136              320          535
+## 203                47169              320          566
+## 204                47215              320          589
+## 205                47260              320          620
+## 206                47372              320          819
+## 207                47446              320          877
+## 208                47521              320          947
+## 209                47611              320          973
+## 210                47666              320         1018
+## 211                47726              320         1156
+## 212                47843              320         1139
+## 213                47945              320         1307
+## 214                48019              320         1469
+## 215                48096              320         1541
+## 216                48179              320         1519
+## 217                48328              322         1473
+## 218                48560              323         1321
+## 219                48626              323         1427
+## 220                48710              323         1424
+## 221                48882              323         1354
+## 222                49103              323         1205
+## 223                49281              323         1113
+## 224                49405              323         1146
+## 225                49599              323         1019
+## 226                49831              323          940
+## 227                50029              323          832
+## 228                50127              323          775
+## 229                50205              323          746
+## 230                50298              323          758
+## 231                50358              323          795
+## 232                50450              323          796
+## 233                50547              323          797</code></pre>
+</div>
+<div id="cleaning-up-the-dataset" class="section level1">
+<h1>Cleaning up the dataset</h1>
+<pre class="r"><code># checking for NAs
+is.na(data)</code></pre>
+<pre><code>##        confirmed recovered death  date cumulative_confirmed
+##   [1,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [2,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [3,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [4,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [5,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [6,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [7,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [8,]     FALSE     FALSE FALSE FALSE                FALSE
+##   [9,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [10,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [11,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [12,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [13,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [14,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [15,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [16,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [17,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [18,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [19,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [20,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [21,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [22,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [23,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [24,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [25,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [26,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [27,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [28,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [29,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [30,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [31,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [32,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [33,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [34,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [35,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [36,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [37,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [38,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [39,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [40,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [41,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [42,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [43,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [44,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [45,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [46,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [47,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [48,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [49,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [50,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [51,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [52,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [53,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [54,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [55,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [56,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [57,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [58,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [59,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [60,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [61,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [62,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [63,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [64,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [65,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [66,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [67,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [68,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [69,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [70,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [71,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [72,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [73,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [74,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [75,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [76,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [77,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [78,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [79,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [80,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [81,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [82,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [83,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [84,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [85,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [86,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [87,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [88,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [89,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [90,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [91,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [92,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [93,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [94,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [95,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [96,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [97,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [98,]     FALSE     FALSE FALSE FALSE                FALSE
+##  [99,]     FALSE     FALSE FALSE FALSE                FALSE
+## [100,]     FALSE     FALSE FALSE FALSE                FALSE
+## [101,]     FALSE     FALSE FALSE FALSE                FALSE
+## [102,]     FALSE     FALSE FALSE FALSE                FALSE
+## [103,]     FALSE     FALSE FALSE FALSE                FALSE
+## [104,]     FALSE     FALSE FALSE FALSE                FALSE
+## [105,]     FALSE     FALSE FALSE FALSE                FALSE
+## [106,]     FALSE     FALSE FALSE FALSE                FALSE
+## [107,]     FALSE     FALSE FALSE FALSE                FALSE
+## [108,]     FALSE     FALSE FALSE FALSE                FALSE
+## [109,]     FALSE     FALSE FALSE FALSE                FALSE
+## [110,]     FALSE     FALSE FALSE FALSE                FALSE
+## [111,]     FALSE     FALSE FALSE FALSE                FALSE
+## [112,]     FALSE     FALSE FALSE FALSE                FALSE
+## [113,]     FALSE     FALSE FALSE FALSE                FALSE
+## [114,]     FALSE     FALSE FALSE FALSE                FALSE
+## [115,]     FALSE     FALSE FALSE FALSE                FALSE
+## [116,]     FALSE     FALSE FALSE FALSE                FALSE
+## [117,]     FALSE     FALSE FALSE FALSE                FALSE
+## [118,]     FALSE     FALSE FALSE FALSE                FALSE
+## [119,]     FALSE     FALSE FALSE FALSE                FALSE
+## [120,]     FALSE     FALSE FALSE FALSE                FALSE
+## [121,]     FALSE     FALSE FALSE FALSE                FALSE
+## [122,]     FALSE     FALSE FALSE FALSE                FALSE
+## [123,]     FALSE     FALSE FALSE FALSE                FALSE
+## [124,]     FALSE     FALSE FALSE FALSE                FALSE
+## [125,]     FALSE     FALSE FALSE FALSE                FALSE
+## [126,]     FALSE     FALSE FALSE FALSE                FALSE
+## [127,]     FALSE     FALSE FALSE FALSE                FALSE
+## [128,]     FALSE     FALSE FALSE FALSE                FALSE
+## [129,]     FALSE     FALSE FALSE FALSE                FALSE
+## [130,]     FALSE     FALSE FALSE FALSE                FALSE
+## [131,]     FALSE     FALSE FALSE FALSE                FALSE
+## [132,]     FALSE     FALSE FALSE FALSE                FALSE
+## [133,]     FALSE     FALSE FALSE FALSE                FALSE
+## [134,]     FALSE     FALSE FALSE FALSE                FALSE
+## [135,]     FALSE     FALSE FALSE FALSE                FALSE
+## [136,]     FALSE     FALSE FALSE FALSE                FALSE
+## [137,]     FALSE     FALSE FALSE FALSE                FALSE
+## [138,]     FALSE     FALSE FALSE FALSE                FALSE
+## [139,]     FALSE     FALSE FALSE FALSE                FALSE
+## [140,]     FALSE     FALSE FALSE FALSE                FALSE
+## [141,]     FALSE     FALSE FALSE FALSE                FALSE
+## [142,]     FALSE     FALSE FALSE FALSE                FALSE
+## [143,]     FALSE     FALSE FALSE FALSE                FALSE
+## [144,]     FALSE     FALSE FALSE FALSE                FALSE
+## [145,]     FALSE     FALSE FALSE FALSE                FALSE
+## [146,]     FALSE     FALSE FALSE FALSE                FALSE
+## [147,]     FALSE     FALSE FALSE FALSE                FALSE
+## [148,]     FALSE     FALSE FALSE FALSE                FALSE
+## [149,]     FALSE     FALSE FALSE FALSE                FALSE
+## [150,]     FALSE     FALSE FALSE FALSE                FALSE
+## [151,]     FALSE     FALSE FALSE FALSE                FALSE
+## [152,]     FALSE     FALSE FALSE FALSE                FALSE
+## [153,]     FALSE     FALSE FALSE FALSE                FALSE
+## [154,]     FALSE     FALSE FALSE FALSE                FALSE
+## [155,]     FALSE     FALSE FALSE FALSE                FALSE
+## [156,]     FALSE     FALSE FALSE FALSE                FALSE
+## [157,]     FALSE     FALSE FALSE FALSE                FALSE
+## [158,]     FALSE     FALSE FALSE FALSE                FALSE
+## [159,]     FALSE     FALSE FALSE FALSE                FALSE
+## [160,]     FALSE     FALSE FALSE FALSE                FALSE
+## [161,]     FALSE     FALSE FALSE FALSE                FALSE
+## [162,]     FALSE     FALSE FALSE FALSE                FALSE
+## [163,]     FALSE     FALSE FALSE FALSE                FALSE
+## [164,]     FALSE     FALSE FALSE FALSE                FALSE
+## [165,]     FALSE     FALSE FALSE FALSE                FALSE
+## [166,]     FALSE     FALSE FALSE FALSE                FALSE
+## [167,]     FALSE     FALSE FALSE FALSE                FALSE
+## [168,]     FALSE     FALSE FALSE FALSE                FALSE
+## [169,]     FALSE     FALSE FALSE FALSE                FALSE
+## [170,]     FALSE     FALSE FALSE FALSE                FALSE
+## [171,]     FALSE     FALSE FALSE FALSE                FALSE
+## [172,]     FALSE     FALSE FALSE FALSE                FALSE
+## [173,]     FALSE     FALSE FALSE FALSE                FALSE
+## [174,]     FALSE     FALSE FALSE FALSE                FALSE
+## [175,]     FALSE     FALSE FALSE FALSE                FALSE
+## [176,]     FALSE     FALSE FALSE FALSE                FALSE
+## [177,]     FALSE     FALSE FALSE FALSE                FALSE
+## [178,]     FALSE     FALSE FALSE FALSE                FALSE
+## [179,]     FALSE     FALSE FALSE FALSE                FALSE
+## [180,]     FALSE     FALSE FALSE FALSE                FALSE
+## [181,]     FALSE     FALSE FALSE FALSE                FALSE
+## [182,]     FALSE     FALSE FALSE FALSE                FALSE
+## [183,]     FALSE     FALSE FALSE FALSE                FALSE
+## [184,]     FALSE     FALSE FALSE FALSE                FALSE
+## [185,]     FALSE     FALSE FALSE FALSE                FALSE
+## [186,]     FALSE     FALSE FALSE FALSE                FALSE
+## [187,]     FALSE     FALSE FALSE FALSE                FALSE
+## [188,]     FALSE     FALSE FALSE FALSE                FALSE
+## [189,]     FALSE     FALSE FALSE FALSE                FALSE
+## [190,]     FALSE     FALSE FALSE FALSE                FALSE
+## [191,]     FALSE     FALSE FALSE FALSE                FALSE
+## [192,]     FALSE     FALSE FALSE FALSE                FALSE
+## [193,]     FALSE     FALSE FALSE FALSE                FALSE
+## [194,]     FALSE     FALSE FALSE FALSE                FALSE
+## [195,]     FALSE     FALSE FALSE FALSE                FALSE
+## [196,]     FALSE     FALSE FALSE FALSE                FALSE
+## [197,]     FALSE     FALSE FALSE FALSE                FALSE
+## [198,]     FALSE     FALSE FALSE FALSE                FALSE
+## [199,]     FALSE     FALSE FALSE FALSE                FALSE
+## [200,]     FALSE     FALSE FALSE FALSE                FALSE
+## [201,]     FALSE     FALSE FALSE FALSE                FALSE
+## [202,]     FALSE     FALSE FALSE FALSE                FALSE
+## [203,]     FALSE     FALSE FALSE FALSE                FALSE
+## [204,]     FALSE     FALSE FALSE FALSE                FALSE
+## [205,]     FALSE     FALSE FALSE FALSE                FALSE
+## [206,]     FALSE     FALSE FALSE FALSE                FALSE
+## [207,]     FALSE     FALSE FALSE FALSE                FALSE
+## [208,]     FALSE     FALSE FALSE FALSE                FALSE
+## [209,]     FALSE     FALSE FALSE FALSE                FALSE
+## [210,]     FALSE     FALSE FALSE FALSE                FALSE
+## [211,]     FALSE     FALSE FALSE FALSE                FALSE
+## [212,]     FALSE     FALSE FALSE FALSE                FALSE
+## [213,]     FALSE     FALSE FALSE FALSE                FALSE
+## [214,]     FALSE     FALSE FALSE FALSE                FALSE
+## [215,]     FALSE     FALSE FALSE FALSE                FALSE
+## [216,]     FALSE     FALSE FALSE FALSE                FALSE
+## [217,]     FALSE     FALSE FALSE FALSE                FALSE
+## [218,]     FALSE     FALSE FALSE FALSE                FALSE
+## [219,]     FALSE     FALSE FALSE FALSE                FALSE
+## [220,]     FALSE     FALSE FALSE FALSE                FALSE
+## [221,]     FALSE     FALSE FALSE FALSE                FALSE
+## [222,]     FALSE     FALSE FALSE FALSE                FALSE
+## [223,]     FALSE     FALSE FALSE FALSE                FALSE
+## [224,]     FALSE     FALSE FALSE FALSE                FALSE
+## [225,]     FALSE     FALSE FALSE FALSE                FALSE
+## [226,]     FALSE     FALSE FALSE FALSE                FALSE
+## [227,]     FALSE     FALSE FALSE FALSE                FALSE
+## [228,]     FALSE     FALSE FALSE FALSE                FALSE
+## [229,]     FALSE     FALSE FALSE FALSE                FALSE
+## [230,]     FALSE     FALSE FALSE FALSE                FALSE
+## [231,]     FALSE     FALSE FALSE FALSE                FALSE
+## [232,]     FALSE     FALSE FALSE FALSE                FALSE
+## [233,]     FALSE     FALSE FALSE FALSE                FALSE
+##        cumulative_recovered cumulative_death active_cases
+##   [1,]                FALSE            FALSE        FALSE
+##   [2,]                FALSE            FALSE        FALSE
+##   [3,]                FALSE            FALSE        FALSE
+##   [4,]                FALSE            FALSE        FALSE
+##   [5,]                FALSE            FALSE        FALSE
+##   [6,]                FALSE            FALSE        FALSE
+##   [7,]                FALSE            FALSE        FALSE
+##   [8,]                FALSE            FALSE        FALSE
+##   [9,]                FALSE            FALSE        FALSE
+##  [10,]                FALSE            FALSE        FALSE
+##  [11,]                FALSE            FALSE        FALSE
+##  [12,]                FALSE            FALSE        FALSE
+##  [13,]                FALSE            FALSE        FALSE
+##  [14,]                FALSE            FALSE        FALSE
+##  [15,]                FALSE            FALSE        FALSE
+##  [16,]                FALSE            FALSE        FALSE
+##  [17,]                FALSE            FALSE        FALSE
+##  [18,]                FALSE            FALSE        FALSE
+##  [19,]                FALSE            FALSE        FALSE
+##  [20,]                FALSE            FALSE        FALSE
+##  [21,]                FALSE            FALSE        FALSE
+##  [22,]                FALSE            FALSE        FALSE
+##  [23,]                FALSE            FALSE        FALSE
+##  [24,]                FALSE            FALSE        FALSE
+##  [25,]                FALSE            FALSE        FALSE
+##  [26,]                FALSE            FALSE        FALSE
+##  [27,]                FALSE            FALSE        FALSE
+##  [28,]                FALSE            FALSE        FALSE
+##  [29,]                FALSE            FALSE        FALSE
+##  [30,]                FALSE            FALSE        FALSE
+##  [31,]                FALSE            FALSE        FALSE
+##  [32,]                FALSE            FALSE        FALSE
+##  [33,]                FALSE            FALSE        FALSE
+##  [34,]                FALSE            FALSE        FALSE
+##  [35,]                FALSE            FALSE        FALSE
+##  [36,]                FALSE            FALSE        FALSE
+##  [37,]                FALSE            FALSE        FALSE
+##  [38,]                FALSE            FALSE        FALSE
+##  [39,]                FALSE            FALSE        FALSE
+##  [40,]                FALSE            FALSE        FALSE
+##  [41,]                FALSE            FALSE        FALSE
+##  [42,]                FALSE            FALSE        FALSE
+##  [43,]                FALSE            FALSE        FALSE
+##  [44,]                FALSE            FALSE        FALSE
+##  [45,]                FALSE            FALSE        FALSE
+##  [46,]                FALSE            FALSE        FALSE
+##  [47,]                FALSE            FALSE        FALSE
+##  [48,]                FALSE            FALSE        FALSE
+##  [49,]                FALSE            FALSE        FALSE
+##  [50,]                FALSE            FALSE        FALSE
+##  [51,]                FALSE            FALSE        FALSE
+##  [52,]                FALSE            FALSE        FALSE
+##  [53,]                FALSE            FALSE        FALSE
+##  [54,]                FALSE            FALSE        FALSE
+##  [55,]                FALSE            FALSE        FALSE
+##  [56,]                FALSE            FALSE        FALSE
+##  [57,]                FALSE            FALSE        FALSE
+##  [58,]                FALSE            FALSE        FALSE
+##  [59,]                FALSE            FALSE        FALSE
+##  [60,]                FALSE            FALSE        FALSE
+##  [61,]                FALSE            FALSE        FALSE
+##  [62,]                FALSE            FALSE        FALSE
+##  [63,]                FALSE            FALSE        FALSE
+##  [64,]                FALSE            FALSE        FALSE
+##  [65,]                FALSE            FALSE        FALSE
+##  [66,]                FALSE            FALSE        FALSE
+##  [67,]                FALSE            FALSE        FALSE
+##  [68,]                FALSE            FALSE        FALSE
+##  [69,]                FALSE            FALSE        FALSE
+##  [70,]                FALSE            FALSE        FALSE
+##  [71,]                FALSE            FALSE        FALSE
+##  [72,]                FALSE            FALSE        FALSE
+##  [73,]                FALSE            FALSE        FALSE
+##  [74,]                FALSE            FALSE        FALSE
+##  [75,]                FALSE            FALSE        FALSE
+##  [76,]                FALSE            FALSE        FALSE
+##  [77,]                FALSE            FALSE        FALSE
+##  [78,]                FALSE            FALSE        FALSE
+##  [79,]                FALSE            FALSE        FALSE
+##  [80,]                FALSE            FALSE        FALSE
+##  [81,]                FALSE            FALSE        FALSE
+##  [82,]                FALSE            FALSE        FALSE
+##  [83,]                FALSE            FALSE        FALSE
+##  [84,]                FALSE            FALSE        FALSE
+##  [85,]                FALSE            FALSE        FALSE
+##  [86,]                FALSE            FALSE        FALSE
+##  [87,]                FALSE            FALSE        FALSE
+##  [88,]                FALSE            FALSE        FALSE
+##  [89,]                FALSE            FALSE        FALSE
+##  [90,]                FALSE            FALSE        FALSE
+##  [91,]                FALSE            FALSE        FALSE
+##  [92,]                FALSE            FALSE        FALSE
+##  [93,]                FALSE            FALSE        FALSE
+##  [94,]                FALSE            FALSE        FALSE
+##  [95,]                FALSE            FALSE        FALSE
+##  [96,]                FALSE            FALSE        FALSE
+##  [97,]                FALSE            FALSE        FALSE
+##  [98,]                FALSE            FALSE        FALSE
+##  [99,]                FALSE            FALSE        FALSE
+## [100,]                FALSE            FALSE        FALSE
+## [101,]                FALSE            FALSE        FALSE
+## [102,]                FALSE            FALSE        FALSE
+## [103,]                FALSE            FALSE        FALSE
+## [104,]                FALSE            FALSE        FALSE
+## [105,]                FALSE            FALSE        FALSE
+## [106,]                FALSE            FALSE        FALSE
+## [107,]                FALSE            FALSE        FALSE
+## [108,]                FALSE            FALSE        FALSE
+## [109,]                FALSE            FALSE        FALSE
+## [110,]                FALSE            FALSE        FALSE
+## [111,]                FALSE            FALSE        FALSE
+## [112,]                FALSE            FALSE        FALSE
+## [113,]                FALSE            FALSE        FALSE
+## [114,]                FALSE            FALSE        FALSE
+## [115,]                FALSE            FALSE        FALSE
+## [116,]                FALSE            FALSE        FALSE
+## [117,]                FALSE            FALSE        FALSE
+## [118,]                FALSE            FALSE        FALSE
+## [119,]                FALSE            FALSE        FALSE
+## [120,]                FALSE            FALSE        FALSE
+## [121,]                FALSE            FALSE        FALSE
+## [122,]                FALSE            FALSE        FALSE
+## [123,]                FALSE            FALSE        FALSE
+## [124,]                FALSE            FALSE        FALSE
+## [125,]                FALSE            FALSE        FALSE
+## [126,]                FALSE            FALSE        FALSE
+## [127,]                FALSE            FALSE        FALSE
+## [128,]                FALSE            FALSE        FALSE
+## [129,]                FALSE            FALSE        FALSE
+## [130,]                FALSE            FALSE        FALSE
+## [131,]                FALSE            FALSE        FALSE
+## [132,]                FALSE            FALSE        FALSE
+## [133,]                FALSE            FALSE        FALSE
+## [134,]                FALSE            FALSE        FALSE
+## [135,]                FALSE            FALSE        FALSE
+## [136,]                FALSE            FALSE        FALSE
+## [137,]                FALSE            FALSE        FALSE
+## [138,]                FALSE            FALSE        FALSE
+## [139,]                FALSE            FALSE        FALSE
+## [140,]                FALSE            FALSE        FALSE
+## [141,]                FALSE            FALSE        FALSE
+## [142,]                FALSE            FALSE        FALSE
+## [143,]                FALSE            FALSE        FALSE
+## [144,]                FALSE            FALSE        FALSE
+## [145,]                FALSE            FALSE        FALSE
+## [146,]                FALSE            FALSE        FALSE
+## [147,]                FALSE            FALSE        FALSE
+## [148,]                FALSE            FALSE        FALSE
+## [149,]                FALSE            FALSE        FALSE
+## [150,]                FALSE            FALSE        FALSE
+## [151,]                FALSE            FALSE        FALSE
+## [152,]                FALSE            FALSE        FALSE
+## [153,]                FALSE            FALSE        FALSE
+## [154,]                FALSE            FALSE        FALSE
+## [155,]                FALSE            FALSE        FALSE
+## [156,]                FALSE            FALSE        FALSE
+## [157,]                FALSE            FALSE        FALSE
+## [158,]                FALSE            FALSE        FALSE
+## [159,]                FALSE            FALSE        FALSE
+## [160,]                FALSE            FALSE        FALSE
+## [161,]                FALSE            FALSE        FALSE
+## [162,]                FALSE            FALSE        FALSE
+## [163,]                FALSE            FALSE        FALSE
+## [164,]                FALSE            FALSE        FALSE
+## [165,]                FALSE            FALSE        FALSE
+## [166,]                FALSE            FALSE        FALSE
+## [167,]                FALSE            FALSE        FALSE
+## [168,]                FALSE            FALSE        FALSE
+## [169,]                FALSE            FALSE        FALSE
+## [170,]                FALSE            FALSE        FALSE
+## [171,]                FALSE            FALSE        FALSE
+## [172,]                FALSE            FALSE        FALSE
+## [173,]                FALSE            FALSE        FALSE
+## [174,]                FALSE            FALSE        FALSE
+## [175,]                FALSE            FALSE        FALSE
+## [176,]                FALSE            FALSE        FALSE
+## [177,]                FALSE            FALSE        FALSE
+## [178,]                FALSE            FALSE        FALSE
+## [179,]                FALSE            FALSE        FALSE
+## [180,]                FALSE            FALSE        FALSE
+## [181,]                FALSE            FALSE        FALSE
+## [182,]                FALSE            FALSE        FALSE
+## [183,]                FALSE            FALSE        FALSE
+## [184,]                FALSE            FALSE        FALSE
+## [185,]                FALSE            FALSE        FALSE
+## [186,]                FALSE            FALSE        FALSE
+## [187,]                FALSE            FALSE        FALSE
+## [188,]                FALSE            FALSE        FALSE
+## [189,]                FALSE            FALSE        FALSE
+## [190,]                FALSE            FALSE        FALSE
+## [191,]                FALSE            FALSE        FALSE
+## [192,]                FALSE            FALSE        FALSE
+## [193,]                FALSE            FALSE        FALSE
+## [194,]                FALSE            FALSE        FALSE
+## [195,]                FALSE            FALSE        FALSE
+## [196,]                FALSE            FALSE        FALSE
+## [197,]                FALSE            FALSE        FALSE
+## [198,]                FALSE            FALSE        FALSE
+## [199,]                FALSE            FALSE        FALSE
+## [200,]                FALSE            FALSE        FALSE
+## [201,]                FALSE            FALSE        FALSE
+## [202,]                FALSE            FALSE        FALSE
+## [203,]                FALSE            FALSE        FALSE
+## [204,]                FALSE            FALSE        FALSE
+## [205,]                FALSE            FALSE        FALSE
+## [206,]                FALSE            FALSE        FALSE
+## [207,]                FALSE            FALSE        FALSE
+## [208,]                FALSE            FALSE        FALSE
+## [209,]                FALSE            FALSE        FALSE
+## [210,]                FALSE            FALSE        FALSE
+## [211,]                FALSE            FALSE        FALSE
+## [212,]                FALSE            FALSE        FALSE
+## [213,]                FALSE            FALSE        FALSE
+## [214,]                FALSE            FALSE        FALSE
+## [215,]                FALSE            FALSE        FALSE
+## [216,]                FALSE            FALSE        FALSE
+## [217,]                FALSE            FALSE        FALSE
+## [218,]                FALSE            FALSE        FALSE
+## [219,]                FALSE            FALSE        FALSE
+## [220,]                FALSE            FALSE        FALSE
+## [221,]                FALSE            FALSE        FALSE
+## [222,]                FALSE            FALSE        FALSE
+## [223,]                FALSE            FALSE        FALSE
+## [224,]                FALSE            FALSE        FALSE
+## [225,]                FALSE            FALSE        FALSE
+## [226,]                FALSE            FALSE        FALSE
+## [227,]                FALSE            FALSE        FALSE
+## [228,]                FALSE            FALSE        FALSE
+## [229,]                FALSE            FALSE        FALSE
+## [230,]                FALSE            FALSE        FALSE
+## [231,]                FALSE            FALSE        FALSE
+## [232,]                FALSE            FALSE        FALSE
+## [233,]                FALSE            FALSE        FALSE</code></pre>
+<pre class="r"><code>#no Nas reported but I will go ahead and omit them anyways
+data &lt;- na.omit(data)
+
+skim(data) # checking again</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">233</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="19%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">date</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">233</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="22%" />
+<col width="10%" />
+<col width="14%" />
+<col width="9%" />
+<col width="9%" />
+<col width="3%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">confirmed</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">221.75</td>
+<td align="right">241.39</td>
+<td align="right">1</td>
+<td align="right">59</td>
+<td align="right">131</td>
+<td align="right">295</td>
+<td align="right">1513</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">recovered</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">216.94</td>
+<td align="right">441.66</td>
+<td align="right">0</td>
+<td align="right">32</td>
+<td align="right">97</td>
+<td align="right">221</td>
+<td align="right">5526</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">death</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.39</td>
+<td align="right">2.57</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">cumulative_confirmed</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">28642.17</td>
+<td align="right">19231.47</td>
+<td align="right">2</td>
+<td align="right">8070</td>
+<td align="right">35501</td>
+<td align="right">46626</td>
+<td align="right">51667</td>
+<td align="left">▅▂▂▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">cumulative_recovered</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">26223.44</td>
+<td align="right">20028.78</td>
+<td align="right">0</td>
+<td align="right">2947</td>
+<td align="right">32096</td>
+<td align="right">45757</td>
+<td align="right">50547</td>
+<td align="left">▆▂▁▂▇</td>
+</tr>
+<tr class="even">
+<td align="left">cumulative_death</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">174.39</td>
+<td align="right">124.10</td>
+<td align="right">0</td>
+<td align="right">36</td>
+<td align="right">182</td>
+<td align="right">301</td>
+<td align="right">323</td>
+<td align="left">▆▂▂▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">active_cases</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2244.34</td>
+<td align="right">2066.14</td>
+<td align="right">2</td>
+<td align="right">524</td>
+<td align="right">1384</td>
+<td align="right">3782</td>
+<td align="right">8585</td>
+<td align="left">▇▂▃▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="subsetting-our-variables-of-interest" class="section level1">
+<h1>subsetting our variables of interest</h1>
+<pre class="r"><code># so I am interested in the total number of cases recorded across the year so I will subset the variable for active cases and inspect it
+data$myVar1 &lt;- data$active_cases
+
+str(data$myVar1)</code></pre>
+<pre><code>##  int [1:233] 2 4 6 7 9 11 16 16 18 21 ...</code></pre>
+<pre class="r"><code>summary(data$myVar1)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       2     524    1384    2244    3782    8585</code></pre>
+</div>
+<div
+id="plotting-the-histograms-of-the-longitudes-of-the-different-facilities-across-the-country"
+class="section level1">
+<h1>Plotting the histograms of the longitudes of the different
+facilities across the country</h1>
+<pre class="r"><code>p1 &lt;- ggplot(data=data, aes(x=myVar1, y=..density..)) +
+  geom_histogram(color=&quot;grey60&quot;,fill=&quot;cornsilk&quot;,size=0.2) </code></pre>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<pre class="r"><code>print(p1) #clear bimodal peaks in the number of actives cases recorded showing on the graph. This can be correlated to the seasons of the year and the laxing of rules surrounding covid.</code></pre>
+<pre><code>## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
+## ℹ Please use `after_stat(density)` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="adding-the-emperical-density-curve" class="section level1">
+<h1>adding the emperical density curve</h1>
+<pre class="r"><code>p1 &lt;-  p1 +  geom_density(linetype=&quot;dotted&quot;,size=0.75)
+print(p1)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="get-maximum-likelihood-parameters-for-normal"
+class="section level1">
+<h1>Get maximum likelihood parameters for normal</h1>
+<pre class="r"><code>normPars &lt;- fitdistr(data$myVar1,&quot;normal&quot;)
+print(normPars)</code></pre>
+<pre><code>##       mean          sd    
+##   2244.34335   2061.70604 
+##  ( 135.06685) (  95.50669)</code></pre>
+<pre class="r"><code>str(normPars)</code></pre>
+<pre><code>## List of 5
+##  $ estimate: Named num [1:2] 2244 2062
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mean&quot; &quot;sd&quot;
+##  $ sd      : Named num [1:2] 135.1 95.5
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mean&quot; &quot;sd&quot;
+##  $ vcov    : num [1:2, 1:2] 18243 0 0 9122
+##   ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..$ : chr [1:2] &quot;mean&quot; &quot;sd&quot;
+##   .. ..$ : chr [1:2] &quot;mean&quot; &quot;sd&quot;
+##  $ n       : int 233
+##  $ loglik  : num -2109
+##  - attr(*, &quot;class&quot;)= chr &quot;fitdistr&quot;</code></pre>
+<pre class="r"><code>normPars$estimate[&quot;mean&quot;] </code></pre>
+<pre><code>##     mean 
+## 2244.343</code></pre>
+</div>
+<div id="plot-normal-probability-density" class="section level1">
+<h1>Plot normal probability density</h1>
+<pre class="r"><code>meanML &lt;- normPars$estimate[&quot;mean&quot;]
+sdML &lt;- normPars$estimate[&quot;sd&quot;]
+
+xval &lt;- seq(0,max(data$myVar1),len=length(data$myVar1))
+
+ stat &lt;- stat_function(aes(x = xval, y = ..y..), fun = dnorm, colour=&quot;red&quot;, n = length(data$myVar1), args = list(mean = meanML, sd = sdML))
+ p1 + stat</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="plot-exponential-probability-density" class="section level1">
+<h1>Plot exponential probability density</h1>
+<pre class="r"><code>expoPars &lt;- fitdistr(data$myVar1,&quot;exponential&quot;)
+rateML &lt;- expoPars$estimate[&quot;rate&quot;]
+
+stat2 &lt;- stat_function(aes(x = xval, y = ..y..), fun = dexp, colour=&quot;blue&quot;, n = length(data$myVar1), args = list(rate=rateML))
+ p1 + stat + stat2</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="plot-uniform-probability-density" class="section level1">
+<h1>Plot uniform probability density</h1>
+<pre class="r"><code>stat3 &lt;- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour=&quot;darkgreen&quot;, n = length(data$myVar1), args = list(min=min(data$myVar1), max=max(data$myVar1)))
+ p1 + stat + stat2 + stat3</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="plot-gamma-probability-density" class="section level1">
+<h1>Plot gamma probability density</h1>
+<pre class="r"><code># received an earlier error while trying to do this estimation, will try log transforming the data before fitting it.
+gammaPars &lt;- fitdistr(log(data$myVar1),&quot;gamma&quot;)</code></pre>
+<pre><code>## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced</code></pre>
+<pre class="r"><code>shapeML &lt;- gammaPars$estimate[&quot;shape&quot;]
+rateML &lt;- gammaPars$estimate[&quot;rate&quot;]
+
+stat4 &lt;- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour=&quot;brown&quot;, n = length(data$myVar1), args = list(shape=shapeML, rate=rateML))
+ p1 + stat + stat2 + stat3 + stat4</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="plot-beta-probability-density" class="section level1">
+<h1>Plot beta probability density</h1>
+<pre class="r"><code>pSpecial &lt;- ggplot(data=data, aes(x=myVar1/(max(myVar1 + 0.1)), y=..density..)) +
+  geom_histogram(color=&quot;grey60&quot;,fill=&quot;cornsilk&quot;,size=0.2) + 
+  xlim(c(0,1)) +
+  geom_density(size=0.75,linetype=&quot;dotted&quot;)
+
+betaPars &lt;- fitdistr(x=data$myVar1/max(data$myVar1 + 0.1),start=list(shape1=1,shape2=2),&quot;beta&quot;)</code></pre>
+<pre><code>## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced
+## Warning in densfun(x, parm[1], parm[2], ...): NaNs produced</code></pre>
+<pre class="r"><code>shape1ML &lt;- betaPars$estimate[&quot;shape1&quot;]
+shape2ML &lt;- betaPars$estimate[&quot;shape2&quot;]
+
+statSpecial &lt;- stat_function(aes(x = xval, y = ..y..), fun = dbeta, colour=&quot;orchid&quot;, n = length(data$myVar1), args = list(shape1=shape1ML,shape2=shape2ML))
+pSpecial + statSpecial</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_bar()`).</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div
+id="creating-a-simulated-dataset-based-on-the-gamma-probability-density-of-my-data.-i-used-rgamma-in-this-case"
+class="section level1">
+<h1>creating a simulated dataset based on the gamma probability density
+of my data. I used rgamma in this case</h1>
+<pre class="r"><code>sim_data &lt;- rgamma(n=length(data$myVar1), shape = shapeML, rate = rateML)
+
+sim_d &lt;- 1:length(data$myVar1)
+
+sim_dataset &lt;- data.frame(sim_data, sim_d)
+
+str(sim_dataset)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    233 obs. of  2 variables:
+##  $ sim_data: num  7.36 3.99 7.41 4.65 6 ...
+##  $ sim_d   : int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+<pre class="r"><code>summary(sim_dataset)</code></pre>
+<pre><code>##     sim_data          sim_d    
+##  Min.   : 2.876   Min.   :  1  
+##  1st Qu.: 5.630   1st Qu.: 59  
+##  Median : 6.889   Median :117  
+##  Mean   : 7.050   Mean   :117  
+##  3rd Qu.: 8.149   3rd Qu.:175  
+##  Max.   :13.268   Max.   :233</code></pre>
+</div>
+<div id="plotting-the-data-based-on-the-gamma-probability-density"
+class="section level1">
+<h1>plotting the data based on the gamma probability density</h1>
+<pre class="r"><code>p2 &lt;- ggplot(data=sim_dataset, aes(x=sim_data, y=..density..)) +
+  geom_histogram(color=&quot;grey60&quot;,fill=&quot;cornsilk&quot;,linewidth=0.2) 
+p2 + stat4</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="homework_eight_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Doesn’t look like gamma distribution fits my data in this case.
+However, there is a clear bimodal distribution of the data across two
+peaks. I should definitely try other stuff.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

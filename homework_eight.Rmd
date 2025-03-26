@@ -1,0 +1,166 @@
+---
+title: "homework_eight"
+author: "Isaac Buabeng"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Acknowlegements and Data Use Permissions
+The dataset used for this homework was focused on the number of active daily covid-19 cases recorded in 2020 across Ghana and was sourced from [google kaggle](https://www.kaggle.com/datasets/sammyhawkrad/ghana-covid19-dataset), with subsequent source permissions from the [Ministry of Health, Ghana](http://www.moh-ghana.org/)
+
+
+# loading in the necessary libraries 
+```{r}
+library(ggplot2) # for graphics
+library(MASS) # for maximum likelihood estimation
+library(skimr) # for inspecting our data
+```
+
+
+# load in the dataset and inspect it
+```{r}
+data <- read.table("Ghana_Covid19_DailyActive.csv",header=TRUE, sep=",", fill=TRUE, quote="")
+
+str(data) # checking the structure of the dataframe
+skim(data) # inspecting the dataframe
+summary(data) # inspecting the dataframe
+
+print(data)
+```
+
+
+# Cleaning up the dataset
+```{r}
+# checking for NAs
+is.na(data)
+
+#no Nas reported but I will go ahead and omit them anyways
+data <- na.omit(data)
+
+skim(data) # checking again
+```
+
+ 
+# subsetting our variables of interest
+```{r}
+# so I am interested in the total number of cases recorded across the year so I will subset the variable for active cases and inspect it
+data$myVar1 <- data$active_cases
+
+str(data$myVar1)
+
+summary(data$myVar1)
+```
+
+
+# Plotting the histograms of the longitudes of the different facilities across the country
+```{r}
+p1 <- ggplot(data=data, aes(x=myVar1, y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) 
+print(p1) #clear bimodal peaks in the number of actives cases recorded showing on the graph. This can be correlated to the seasons of the year and the laxing of rules surrounding covid.
+```
+
+
+
+# adding the emperical density curve
+```{r}
+p1 <-  p1 +  geom_density(linetype="dotted",size=0.75)
+print(p1)
+```
+
+
+
+# Get maximum likelihood parameters for normal
+```{r}
+normPars <- fitdistr(data$myVar1,"normal")
+print(normPars)
+str(normPars)
+normPars$estimate["mean"] 
+```
+
+
+# Plot normal probability density
+```{r}
+meanML <- normPars$estimate["mean"]
+sdML <- normPars$estimate["sd"]
+
+xval <- seq(0,max(data$myVar1),len=length(data$myVar1))
+
+ stat <- stat_function(aes(x = xval, y = ..y..), fun = dnorm, colour="red", n = length(data$myVar1), args = list(mean = meanML, sd = sdML))
+ p1 + stat
+```
+
+
+
+# Plot exponential probability density
+```{r}
+expoPars <- fitdistr(data$myVar1,"exponential")
+rateML <- expoPars$estimate["rate"]
+
+stat2 <- stat_function(aes(x = xval, y = ..y..), fun = dexp, colour="blue", n = length(data$myVar1), args = list(rate=rateML))
+ p1 + stat + stat2
+```
+
+
+# Plot uniform probability density
+```{r}
+stat3 <- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour="darkgreen", n = length(data$myVar1), args = list(min=min(data$myVar1), max=max(data$myVar1)))
+ p1 + stat + stat2 + stat3
+```
+
+
+# Plot gamma probability density
+```{r}
+# received an earlier error while trying to do this estimation, will try log transforming the data before fitting it.
+gammaPars <- fitdistr(log(data$myVar1),"gamma")
+shapeML <- gammaPars$estimate["shape"]
+rateML <- gammaPars$estimate["rate"]
+
+stat4 <- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour="brown", n = length(data$myVar1), args = list(shape=shapeML, rate=rateML))
+ p1 + stat + stat2 + stat3 + stat4
+```
+
+
+# Plot beta probability density
+```{r}
+pSpecial <- ggplot(data=data, aes(x=myVar1/(max(myVar1 + 0.1)), y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) + 
+  xlim(c(0,1)) +
+  geom_density(size=0.75,linetype="dotted")
+
+betaPars <- fitdistr(x=data$myVar1/max(data$myVar1 + 0.1),start=list(shape1=1,shape2=2),"beta")
+shape1ML <- betaPars$estimate["shape1"]
+shape2ML <- betaPars$estimate["shape2"]
+
+statSpecial <- stat_function(aes(x = xval, y = ..y..), fun = dbeta, colour="orchid", n = length(data$myVar1), args = list(shape1=shape1ML,shape2=shape2ML))
+pSpecial + statSpecial
+```
+
+
+
+# creating a simulated dataset based on the gamma probability density of my data. I used rgamma in this case
+```{r}
+sim_data <- rgamma(n=length(data$myVar1), shape = shapeML, rate = rateML)
+
+sim_d <- 1:length(data$myVar1)
+
+sim_dataset <- data.frame(sim_data, sim_d)
+
+str(sim_dataset)
+
+summary(sim_dataset)
+```
+
+
+# plotting the data based on the gamma probability density 
+```{r}
+p2 <- ggplot(data=sim_dataset, aes(x=sim_data, y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",linewidth=0.2) 
+p2 + stat4
+```
+
+Doesn't look like gamma distribution fits my data in this case. However, there is a clear bimodal distribution of the data across two peaks. I should definitely try other stuff.
