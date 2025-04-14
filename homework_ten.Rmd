@@ -1,0 +1,147 @@
+---
+title: "homework_ten"
+author: "Isaac Buabeng"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Description
+In this homework, I explore the differences in the traits of Palm tree species of African and American/European descent. Specifically, I take look at differences in the average fruit length and maximum stem height asking if there are any differences in these traits. The datasets used for this homework came from [tidytuesday's weekly list of datasets for the year 2025](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-03-18/readme.md).
+
+citation: 
+  @misc{tidytuesday, 
+    title = {Tidy Tuesday: A weekly social data project}, 
+    author = {Data Science Learning Community}, 
+    url = {https://tidytues.day}, 
+    year = {2024} 
+  }
+
+
+
+# Variables Used
+
+1. max_stem_height_m 
+
+2. average_fruit_length_cm
+
+
+
+# Data Exploration and Cleaning
+## load the necessary libraries
+```{r}
+library(tidyr)
+library(ggbeeswarm)
+library(cowplot)
+library(ggridges)
+library(ggplot2)
+library(tidyverse)
+library(skimr)
+```
+
+
+## import the data
+```{r}
+plm_data <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-03-18/palmtrees.csv')
+
+str(plm_data)
+
+skim(plm_data) 
+
+print(plm_data)
+
+# check for the different types of tribes we have in our dataset
+unique(plm_data$palm_tribe) # 23 tribes in total
+
+# select for species in tribes from africa and america/europe based on (Baker & Dransfield, 2016 and Eiserhardt et al., 2011) 
+afro_tribe <- c("Phoeniceae", "Borasseae", "Oranieae", "Sclerospermeae", "Pelagodoxeae", "Podococceae")
+
+eu_us_tribe <- c("Cocoseae", "Phytelepheae", "Geonomateae", "Ceroxyleae", "Chamaedoreeae", "Cryosophileae", "Trachycarpeae", "Irarteeae", "Lepidocaryeae", "Euterpeae", "Eugeissoneae", "Leopoldinieae", "Manicarieae", "Reinhardtieae", "Roystoneeae", "Sabaleae", "Cyclosphatheae")
+
+# select for tribes from africa and take out NAs
+plm_data %>%
+  filter(palm_tribe %in% afro_tribe) %>%
+  drop_na() -> afro_palm 
+
+skim(afro_palm)
+
+print(afro_palm)
+
+# select for tribes from EU and US and take out NAs
+plm_data %>% 
+  filter(palm_tribe %in% eu_us_tribe) %>%
+  drop_na() -> eu_us_palm 
+
+skim(eu_us_palm)
+
+print(eu_us_palm)
+
+# excellent! this would be the only data wrangling we would be doing for now. 
+```
+
+
+
+# Data Visualization
+## visualizing interactions for Tribes in Africa 
+```{r}
+# violinplot for Average Fruit Length by tribe
+ggplot(afro_palm, aes(x = palm_tribe, 
+                      y = average_fruit_length_cm, 
+                      fill = palm_tribe)) +
+  geom_violin() +
+  geom_point(position=position_jitter(width=0.2,
+  height=0.3),color="black",size=0.7) +
+  theme_classic() +
+  labs(title = "Average Fruit Length by Tribe", 
+       x = "Tribe", 
+       y = "Average Fruit Length (cm)")
+
+
+# Boxplot for Maximum Stem Height by Tribe
+ggplot(afro_palm)+ 
+  aes(x = palm_tribe, 
+      y = max_stem_height_m, 
+      fill = palm_tribe) +
+  geom_boxplot() +
+  theme_cowplot() +
+  labs(title = "Maximum Stem Height by Tribe", 
+       x = "Tribe", 
+       y = "Maximum Stem Height (m)")
+
+#looks like our data may not be large enough for the chosen types of visualizations. I am going to use a regular boxplot and a violin plot. 
+```
+
+
+
+## visualizing interactions for Tribes in the EU and US
+```{r}
+# Beeswarm plot for Average Fruit Length across tribes
+ggplot(eu_us_palm) +
+  aes(x = palm_tribe, 
+      y = average_fruit_length_cm, 
+      color = palm_tribe) +
+  geom_beeswarm() +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) +
+  labs(title = "Plot of Average Fruit Length Across Tribes",
+       x = "Tribe",
+       y = "Average Fruit Length (cm)")
+
+
+# Density ridgelines for Maximum Stem Height across tribes
+ggplot(eu_us_palm) +
+       aes(x = max_stem_height_m, 
+           y = palm_tribe, 
+           fill = palm_tribe) +
+  geom_density_ridges(alpha = 0.7) +
+  theme_ridges() +
+  theme_cowplot() +
+  labs(title = "Maximum Stem Height by Tribe", 
+       x = "Maximum Stem Height (m)", 
+       y = "Tribe")
+```
+

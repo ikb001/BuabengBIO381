@@ -27,3 +27,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### WEEK 8 
 [Homework Eight](homework_eight.html)
+
+### WEEK 9
+[Homework Nine]("C:\Users\User\Documents\compbioproj\BuabengBIO381\birds_project.zip")
+
+### WEEK 10
+[Homework Ten](homework_ten.html)
