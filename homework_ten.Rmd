@@ -112,7 +112,7 @@ ggplot(afro_palm)+
        x = "Tribe", 
        y = "Maximum Stem Height (m)")
 
-#looks like our data may not be large enough for the chosen types of visualizations. I am going to use a regular boxplot and a violin plot. 
+#looks like our data may not be large enough for the chosen types of visualizations. I am going to use a regular boxplot and a violin plot. My violin plots look terrible probabily due to the distribution of our data. I wonder what would happen if I normalized it. But for the purpose of this homework, I will be keeping it so until i receive feedback.
 ```
 
 
@@ -143,5 +143,7 @@ ggplot(eu_us_palm) +
   labs(title = "Maximum Stem Height by Tribe", 
        x = "Maximum Stem Height (m)", 
        y = "Tribe")
+
+# comparing plots for the African and the American/European tribes it appears that, species in Europe and America have higher averages for Stem Height and Fruit Length. Also, it appears that our data has more records for American/European tribes than thier african counterparts. This is very interesting and needs further investigation.
 ```
 
