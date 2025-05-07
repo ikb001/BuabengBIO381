@@ -38,6 +38,7 @@ library(tidyr)
 library(ggbeeswarm)
 library(cowplot)
 library(ggridges)
+library(ggmosaic)
 library(ggplot2)
 library(tidyverse)
 library(skimr)
@@ -50,9 +51,11 @@ plm_data <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytues
 
 str(plm_data)
 
-skim(plm_data) 
+head(plm_data) 
 
-print(plm_data)
+tail(plm_data)
+
+summary(plm_data)
 
 # check for the different types of tribes we have in our dataset
 unique(plm_data$palm_tribe) # 23 tribes in total
@@ -67,18 +70,16 @@ plm_data %>%
   filter(palm_tribe %in% afro_tribe) %>%
   drop_na() -> afro_palm 
 
-skim(afro_palm)
+head(afro_palm)
 
-print(afro_palm)
+tail(afro_palm)
 
 # select for tribes from EU and US and take out NAs
 plm_data %>% 
   filter(palm_tribe %in% eu_us_tribe) %>%
   drop_na() -> eu_us_palm 
 
-skim(eu_us_palm)
-
-print(eu_us_palm)
+head(eu_us_palm)
 
 # excellent! this would be the only data wrangling we would be doing for now. 
 ```
@@ -88,17 +89,27 @@ print(eu_us_palm)
 # Data Visualization
 ## visualizing interactions for Tribes in Africa 
 ```{r}
-# violinplot for Average Fruit Length by tribe
-ggplot(afro_palm, aes(x = palm_tribe, 
-                      y = average_fruit_length_cm, 
-                      fill = palm_tribe)) +
-  geom_violin() +
-  geom_point(position=position_jitter(width=0.2,
-  height=0.3),color="black",size=0.7) +
+# mosaic plot for Average Fruit Length by tribe
+# Create a binned category for fruit length
+afro_palm$fruit_length_cat <- cut(afro_palm$average_fruit_length_cm,
+                                  breaks = 4, 
+                                  labels = c("Short", 
+                                             "Medium", 
+                                             "Long", 
+                                             "Very Long"))
+
+# Mosaic plot with two categorical variables
+ggplot(data = afro_palm) +
+  geom_mosaic(aes
+              (weight = 1,
+                  x = product(palm_tribe), 
+                fill = fruit_length_cat)) +
   theme_classic() +
-  labs(title = "Average Fruit Length by Tribe", 
-       x = "Tribe", 
-       y = "Average Fruit Length (cm)")
+  labs(title = "Fruit Length Categories by Tribe",
+       x = "Palm Tribe",
+       y = "Proportion",
+       fill = "Fruit Length Category")
+
 
 
 # Boxplot for Maximum Stem Height by Tribe
@@ -106,43 +117,62 @@ ggplot(afro_palm)+
   aes(x = palm_tribe, 
       y = max_stem_height_m, 
       fill = palm_tribe) +
-  geom_boxplot() +
+  geom_col() +
   theme_cowplot() +
   labs(title = "Maximum Stem Height by Tribe", 
        x = "Tribe", 
        y = "Maximum Stem Height (m)")
-
-#looks like our data may not be large enough for the chosen types of visualizations. I am going to use a regular boxplot and a violin plot. My violin plots look terrible probabily due to the distribution of our data. I wonder what would happen if I normalized it. But for the purpose of this homework, I will be keeping it so until i receive feedback.
 ```
 
 
 
 ## visualizing interactions for Tribes in the EU and US
 ```{r}
-# Beeswarm plot for Average Fruit Length across tribes
-ggplot(eu_us_palm) +
-  aes(x = palm_tribe, 
-      y = average_fruit_length_cm, 
-      color = palm_tribe) +
-  geom_beeswarm() +
+# ridgeline plot for Average Fruit Length across tribes
+ggplot(data = eu_us_palm,
+       aes(
+         x    = average_fruit_length_cm,  # continuous
+         y    = palm_tribe,               # grouping strip
+         fill = palm_tribe                # fill by tribe
+       )) +
+  geom_density_ridges(alpha = 0.7, color = "white") +
   theme_classic() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) +
-  labs(title = "Plot of Average Fruit Length Across Tribes",
-       x = "Tribe",
-       y = "Average Fruit Length (cm)")
+  theme(
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
+    legend.position = "right"
+  ) +
+  labs(
+    title = "Distribution of Average Fruit Length by Tribe",
+    x     = "Average Fruit Length (cm)",
+    y     = "Tribe"
+  )
 
 
 # Density ridgelines for Maximum Stem Height across tribes
-ggplot(eu_us_palm) +
-       aes(x = max_stem_height_m, 
-           y = palm_tribe, 
-           fill = palm_tribe) +
-  geom_density_ridges(alpha = 0.7) +
-  theme_ridges() +
+ggplot(data = eu_us_palm,
+       aes(
+         y = max_stem_height_m,  # continuous axis
+         x = palm_tribe,         # categorical strips
+         color = palm_tribe          # map tribe to point color
+       )) +
+  geom_beeswarm(
+    cex       = 3,          # controls horizontal spacing
+    size      = 2,          # point size
+  ) +
   theme_cowplot() +
-  labs(title = "Maximum Stem Height by Tribe", 
-       x = "Maximum Stem Height (m)", 
-       y = "Tribe")
+  labs(
+    title = "Maximum Stem Height by Tribe",
+    x     = "Tribe",
+    y     = "Maximum Stem Height (m)" 
+  ) +
+  theme(
+    legend.position = "right",
+    axis.text = element_text(size = 12, 
+                              angle = 45,
+                             vjust = 0.5,
+                             hjust = 1)
+  )
 
 # comparing plots for the African and the American/European tribes it appears that, species in Europe and America have higher averages for Stem Height and Fruit Length. Also, it appears that our data has more records for American/European tribes than thier african counterparts. This is very interesting and needs further investigation.
 ```

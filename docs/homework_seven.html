@@ -11,7 +11,7 @@
 
 <meta name="author" content="Isaac Buabeng" />
 
-<meta name="date" content="2025-02-28" />
+<meta name="date" content="2025-05-07" />
 
 <title>homework_seven</title>
 
@@ -280,7 +280,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">homework_seven</h1>
 <h4 class="author">Isaac Buabeng</h4>
-<h4 class="date">2025-02-28</h4>
+<h4 class="date">2025-05-07</h4>
 
 </div>
 
@@ -298,11 +298,12 @@ library(dplyr)</code></pre>
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.4.3</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ forcats   1.0.0     ✔ readr     2.1.5
 ## ✔ ggplot2   3.5.1     ✔ stringr   1.5.1
 ## ✔ lubridate 1.9.4     ✔ tibble    3.2.1
-## ✔ purrr     1.0.2     ✔ tidyr     1.3.1</code></pre>
+## ✔ purrr     1.0.4     ✔ tidyr     1.3.1</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
@@ -312,164 +313,21 @@ library(dplyr)</code></pre>
 <h1>Q1. Read in and Inspect the data</h1>
 <pre class="r"><code>data(&quot;iris&quot;)
 
-skim(iris)</code></pre>
-<table>
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">iris</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">150</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">5</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">factor</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr class="even">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: factor</strong></p>
-<table style="width:100%;">
-<colgroup>
-<col width="17%" />
-<col width="12%" />
-<col width="17%" />
-<col width="9%" />
-<col width="11%" />
-<col width="32%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="left">ordered</th>
-<th align="right">n_unique</th>
-<th align="left">top_counts</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Species</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">FALSE</td>
-<td align="right">3</td>
-<td align="left">set: 50, ver: 50, vir: 50</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table style="width:100%;">
-<colgroup>
-<col width="18%" />
-<col width="13%" />
-<col width="18%" />
-<col width="6%" />
-<col width="6%" />
-<col width="5%" />
-<col width="5%" />
-<col width="6%" />
-<col width="5%" />
-<col width="6%" />
-<col width="7%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5.84</td>
-<td align="right">0.83</td>
-<td align="right">4.3</td>
-<td align="right">5.1</td>
-<td align="right">5.80</td>
-<td align="right">6.4</td>
-<td align="right">7.9</td>
-<td align="left">▆▇▇▅▂</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Width</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.06</td>
-<td align="right">0.44</td>
-<td align="right">2.0</td>
-<td align="right">2.8</td>
-<td align="right">3.00</td>
-<td align="right">3.3</td>
-<td align="right">4.4</td>
-<td align="left">▁▆▇▂▁</td>
-</tr>
-<tr class="odd">
-<td align="left">Petal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.76</td>
-<td align="right">1.77</td>
-<td align="right">1.0</td>
-<td align="right">1.6</td>
-<td align="right">4.35</td>
-<td align="right">5.1</td>
-<td align="right">6.9</td>
-<td align="left">▇▁▆▇▂</td>
-</tr>
-<tr class="even">
-<td align="left">Petal.Width</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1.20</td>
-<td align="right">0.76</td>
-<td align="right">0.1</td>
-<td align="right">0.3</td>
-<td align="right">1.30</td>
-<td align="right">1.8</td>
-<td align="right">2.5</td>
-<td align="left">▇▁▇▅▃</td>
-</tr>
-</tbody>
-</table>
+summary(iris)</code></pre>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+##        Species  
+##  setosa    :50  
+##  versicolor:50  
+##  virginica :50  
+##                 
+##                 
+## </code></pre>
 <pre class="r"><code># There are 5 variables with 150 observations</code></pre>
 </div>
 <div
@@ -484,191 +342,14 @@ the data set?</h1>
   filter(Sepal.Length &gt; 6,
          Sepal.Width &gt; 2.5)
   
-skim(iris1)</code></pre>
-<table>
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">iris1</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">56</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">5</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">Species</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table>
-<colgroup>
-<col width="16%" />
-<col width="12%" />
-<col width="11%" />
-<col width="16%" />
-<col width="5%" />
-<col width="5%" />
-<col width="4%" />
-<col width="5%" />
-<col width="4%" />
-<col width="4%" />
-<col width="5%" />
-<col width="6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="left">Species</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6.48</td>
-<td align="right">0.30</td>
-<td align="right">6.1</td>
-<td align="right">6.20</td>
-<td align="right">6.5</td>
-<td align="right">6.7</td>
-<td align="right">7.0</td>
-<td align="left">▇▅▅▆▃</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Length</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6.79</td>
-<td align="right">0.52</td>
-<td align="right">6.1</td>
-<td align="right">6.40</td>
-<td align="right">6.7</td>
-<td align="right">7.2</td>
-<td align="right">7.9</td>
-<td align="left">▇▆▂▃▃</td>
-</tr>
-<tr class="odd">
-<td align="left">Sepal.Width</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2.99</td>
-<td align="right">0.16</td>
-<td align="right">2.8</td>
-<td align="right">2.90</td>
-<td align="right">3.0</td>
-<td align="right">3.1</td>
-<td align="right">3.3</td>
-<td align="left">▇▃▁▃▃</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Width</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.06</td>
-<td align="right">0.28</td>
-<td align="right">2.6</td>
-<td align="right">2.85</td>
-<td align="right">3.0</td>
-<td align="right">3.2</td>
-<td align="right">3.8</td>
-<td align="left">▇▇▇▁▂</td>
-</tr>
-<tr class="odd">
-<td align="left">Petal.Length</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4.58</td>
-<td align="right">0.25</td>
-<td align="right">4.0</td>
-<td align="right">4.40</td>
-<td align="right">4.6</td>
-<td align="right">4.7</td>
-<td align="right">5.0</td>
-<td align="left">▁▅▅▇▂</td>
-</tr>
-<tr class="even">
-<td align="left">Petal.Length</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5.70</td>
-<td align="right">0.52</td>
-<td align="right">4.8</td>
-<td align="right">5.35</td>
-<td align="right">5.6</td>
-<td align="right">6.0</td>
-<td align="right">6.9</td>
-<td align="left">▅▇▆▃▂</td>
-</tr>
-<tr class="odd">
-<td align="left">Petal.Width</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1.42</td>
-<td align="right">0.12</td>
-<td align="right">1.2</td>
-<td align="right">1.30</td>
-<td align="right">1.4</td>
-<td align="right">1.5</td>
-<td align="right">1.7</td>
-<td align="left">▇▇▅▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">Petal.Width</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2.07</td>
-<td align="right">0.28</td>
-<td align="right">1.4</td>
-<td align="right">1.80</td>
-<td align="right">2.1</td>
-<td align="right">2.3</td>
-<td align="right">2.5</td>
-<td align="left">▂▅▃▆▇</td>
-</tr>
-</tbody>
-</table>
+summary(iris1)</code></pre>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width         Species  
+##  Min.   :6.100   Min.   :2.600   Min.   :4.000   Min.   :1.20   setosa    : 0  
+##  1st Qu.:6.300   1st Qu.:2.875   1st Qu.:4.775   1st Qu.:1.50   versicolor:17  
+##  Median :6.600   Median :3.000   Median :5.400   Median :1.85   virginica :39  
+##  Mean   :6.698   Mean   :3.041   Mean   :5.359   Mean   :1.87                  
+##  3rd Qu.:6.900   3rd Qu.:3.200   3rd Qu.:5.800   3rd Qu.:2.20                  
+##  Max.   :7.900   Max.   :3.800   Max.   :6.900   Max.   :2.50</code></pre>
 <pre class="r"><code># My df has 5 variables with 56 observations</code></pre>
 </div>
 <div
@@ -680,135 +361,14 @@ observations and variables are in the data set?</h1>
 <pre class="r"><code>iris2 &lt;- iris1 %&gt;%
   select(Species, Sepal.Length, Sepal.Width)
 
-skim(iris2)</code></pre>
-<table>
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">iris2</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">56</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">3</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">2</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">Species</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table>
-<colgroup>
-<col width="16%" />
-<col width="12%" />
-<col width="11%" />
-<col width="16%" />
-<col width="5%" />
-<col width="5%" />
-<col width="4%" />
-<col width="5%" />
-<col width="4%" />
-<col width="4%" />
-<col width="5%" />
-<col width="6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="left">Species</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6.48</td>
-<td align="right">0.30</td>
-<td align="right">6.1</td>
-<td align="right">6.20</td>
-<td align="right">6.5</td>
-<td align="right">6.7</td>
-<td align="right">7.0</td>
-<td align="left">▇▅▅▆▃</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Length</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6.79</td>
-<td align="right">0.52</td>
-<td align="right">6.1</td>
-<td align="right">6.40</td>
-<td align="right">6.7</td>
-<td align="right">7.2</td>
-<td align="right">7.9</td>
-<td align="left">▇▆▂▃▃</td>
-</tr>
-<tr class="odd">
-<td align="left">Sepal.Width</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2.99</td>
-<td align="right">0.16</td>
-<td align="right">2.8</td>
-<td align="right">2.90</td>
-<td align="right">3.0</td>
-<td align="right">3.1</td>
-<td align="right">3.3</td>
-<td align="left">▇▃▁▃▃</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Width</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.06</td>
-<td align="right">0.28</td>
-<td align="right">2.6</td>
-<td align="right">2.85</td>
-<td align="right">3.0</td>
-<td align="right">3.2</td>
-<td align="right">3.8</td>
-<td align="left">▇▇▇▁▂</td>
-</tr>
-</tbody>
-</table>
+summary(iris2)</code></pre>
+<pre><code>##        Species    Sepal.Length    Sepal.Width   
+##  setosa    : 0   Min.   :6.100   Min.   :2.600  
+##  versicolor:17   1st Qu.:6.300   1st Qu.:2.875  
+##  virginica :39   Median :6.600   Median :3.000  
+##                  Mean   :6.698   Mean   :3.041  
+##                  3rd Qu.:6.900   3rd Qu.:3.200  
+##                  Max.   :7.900   Max.   :3.800</code></pre>
 <pre class="r"><code># My df has 3 variables with 56 observations</code></pre>
 </div>
 <div
@@ -841,163 +401,25 @@ observations and variables are in the data set?</h1>
 <pre class="r"><code>iris4 &lt;- iris3 %&gt;%
   mutate(Sepal.Area = Sepal.Length * Sepal.Width)
 
-skim(iris4)</code></pre>
-<table>
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">iris4</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">56</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">4</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">3</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">Species</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table>
-<colgroup>
-<col width="14%" />
-<col width="11%" />
-<col width="10%" />
-<col width="14%" />
-<col width="6%" />
-<col width="5%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="left">Species</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6.48</td>
-<td align="right">0.30</td>
-<td align="right">6.10</td>
-<td align="right">6.20</td>
-<td align="right">6.50</td>
-<td align="right">6.70</td>
-<td align="right">7.00</td>
-<td align="left">▇▅▅▆▃</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Length</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6.79</td>
-<td align="right">0.52</td>
-<td align="right">6.10</td>
-<td align="right">6.40</td>
-<td align="right">6.70</td>
-<td align="right">7.20</td>
-<td align="right">7.90</td>
-<td align="left">▇▆▂▃▃</td>
-</tr>
-<tr class="odd">
-<td align="left">Sepal.Width</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2.99</td>
-<td align="right">0.16</td>
-<td align="right">2.80</td>
-<td align="right">2.90</td>
-<td align="right">3.00</td>
-<td align="right">3.10</td>
-<td align="right">3.30</td>
-<td align="left">▇▃▁▃▃</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Width</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.06</td>
-<td align="right">0.28</td>
-<td align="right">2.60</td>
-<td align="right">2.85</td>
-<td align="right">3.00</td>
-<td align="right">3.20</td>
-<td align="right">3.80</td>
-<td align="left">▇▇▇▁▂</td>
-</tr>
-<tr class="odd">
-<td align="left">Sepal.Area</td>
-<td align="left">versicolor</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">19.39</td>
-<td align="right">1.58</td>
-<td align="right">17.08</td>
-<td align="right">18.20</td>
-<td align="right">19.14</td>
-<td align="right">20.77</td>
-<td align="right">22.40</td>
-<td align="left">▆▇▃▆▃</td>
-</tr>
-<tr class="even">
-<td align="left">Sepal.Area</td>
-<td align="left">virginica</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">20.85</td>
-<td align="right">2.88</td>
-<td align="right">15.86</td>
-<td align="right">19.50</td>
-<td align="right">20.79</td>
-<td align="right">21.68</td>
-<td align="right">30.02</td>
-<td align="left">▃▇▃▁▁</td>
-</tr>
-</tbody>
-</table>
+head(iris4)</code></pre>
+<pre><code>## # A tibble: 6 × 4
+## # Groups:   Species [1]
+##   Species   Sepal.Length Sepal.Width Sepal.Area
+##   &lt;fct&gt;            &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+## 1 virginica          7.9         3.8       30.0
+## 2 virginica          7.7         3.8       29.3
+## 3 virginica          7.7         2.6       20.0
+## 4 virginica          7.7         2.8       21.6
+## 5 virginica          7.7         3         23.1
+## 6 virginica          7.6         3         22.8</code></pre>
+<pre class="r"><code>summary(iris4)</code></pre>
+<pre><code>##        Species    Sepal.Length    Sepal.Width      Sepal.Area   
+##  setosa    : 0   Min.   :6.100   Min.   :2.600   Min.   :15.86  
+##  versicolor:17   1st Qu.:6.300   1st Qu.:2.875   1st Qu.:18.30  
+##  virginica :39   Median :6.600   Median :3.000   Median :20.48  
+##                  Mean   :6.698   Mean   :3.041   Mean   :20.40  
+##                  3rd Qu.:6.900   3rd Qu.:3.200   3rd Qu.:21.40  
+##                  Max.   :7.900   Max.   :3.800   Max.   :30.02</code></pre>
 <pre class="r"><code># my df has 4 variables with 56 observations</code></pre>
 </div>
 <div
@@ -1009,7 +431,7 @@ and print iris5</h1>
 <pre class="r"><code>iris5 &lt;- data.frame(average.sepal.length = mean(iris4$Sepal.Length),
           average.sepal.width = mean(iris4$Sepal.Width), 
           sample.size = nrow(iris4)) 
-print(iris5)</code></pre>
+head(iris5)</code></pre>
 <pre><code>##   average.sepal.length average.sepal.width sample.size
 ## 1             6.698214            3.041071          56</code></pre>
 </div>
@@ -1052,12 +474,14 @@ that uses iris as the input and generates irisFinal as the output</h1>
           average.sepal.width = mean(Sepal.Width), 
           sample.size = n())
 
-print(irisFinal)</code></pre>
-<pre><code>## # A tibble: 2 × 4
-##   Species    average.sepal.length average.sepal.width sample.size
-##   &lt;fct&gt;                     &lt;dbl&gt;               &lt;dbl&gt;       &lt;int&gt;
-## 1 versicolor                 6.48                2.99          17
-## 2 virginica                  6.79                3.06          39</code></pre>
+summary(irisFinal)</code></pre>
+<pre><code>##        Species  average.sepal.length average.sepal.width  sample.size  
+##  setosa    :0   Min.   :6.482        Min.   :2.988       Min.   :17.0  
+##  versicolor:1   1st Qu.:6.560        1st Qu.:3.007       1st Qu.:22.5  
+##  virginica :1   Median :6.637        Median :3.026       Median :28.0  
+##                 Mean   :6.637        Mean   :3.026       Mean   :28.0  
+##                 3rd Qu.:6.715        3rd Qu.:3.045       3rd Qu.:33.5  
+##                 Max.   :6.792        Max.   :3.064       Max.   :39.0</code></pre>
 </div>
 <div
 id="create-a-longer-data-frame-using-the-original-iris-data-set-with-three-columns-named-species-measure-value.-the-column-species-will-retain-the-species-names-of-the-data-set.-the-column-measure-will-include-whether-the-value-corresponds-to-sepal.length-sepal.width-petal.length-or-petal.width-and-the-column-value-will-include-the-numerical-values-of-those-measurements."
@@ -1071,21 +495,14 @@ numerical values of those measurements.</h1>
 <pre class="r"><code>iris_longer &lt;- iris %&gt;%
   pivot_longer(!c(Species),names_to = &quot;Measure&quot;,  values_to = &quot;value&quot;)
 
-print(iris_longer)</code></pre>
-<pre><code>## # A tibble: 600 × 3
-##    Species Measure      value
-##    &lt;fct&gt;   &lt;chr&gt;        &lt;dbl&gt;
-##  1 setosa  Sepal.Length   5.1
-##  2 setosa  Sepal.Width    3.5
-##  3 setosa  Petal.Length   1.4
-##  4 setosa  Petal.Width    0.2
-##  5 setosa  Sepal.Length   4.9
-##  6 setosa  Sepal.Width    3  
-##  7 setosa  Petal.Length   1.4
-##  8 setosa  Petal.Width    0.2
-##  9 setosa  Sepal.Length   4.7
-## 10 setosa  Sepal.Width    3.2
-## # ℹ 590 more rows</code></pre>
+summary(iris_longer)</code></pre>
+<pre><code>##        Species      Measure              value      
+##  setosa    :200   Length:600         Min.   :0.100  
+##  versicolor:200   Class :character   1st Qu.:1.700  
+##  virginica :200   Mode  :character   Median :3.200  
+##                                      Mean   :3.465  
+##                                      3rd Qu.:5.100  
+##                                      Max.   :7.900</code></pre>
 </div>
 
 

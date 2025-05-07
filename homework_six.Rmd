@@ -59,34 +59,34 @@ species_name <- c("Starry campylium", "Scorpidium revolvens", "Calliergonella cu
 
 plant_height <- c(round(rnorm(30, mean=15)))
 
-print(plant_height)
+head(plant_height)
 
 stem_width <- c(runif(30))
-print(stem_width)
+head(stem_width)
 
 number_of_leaves <- c(round(rnorm(30, mean=15)))
 
-print(number_of_leaves)
+head(number_of_leaves)
 
 number_of_flowers <- c(round(rnorm(30, mean = 5)))
 print(number_of_flowers)
 
 number_of_fruits <- c(round(rnorm(30, mean=10)))
-print(number_of_fruits)
+head(number_of_fruits)
 
 soil_pH <- c(runif(30, max = 7.8, min = 5.8)) #this is usually the range of pH within rich fen plant communities
-print(soil_pH)
+head(soil_pH)
 
 Ca_concentration <- c(runif(30))
-print(Ca_concentration)
+head(Ca_concentration)
 
 
 # make the dataframe
 data.frame(site_id, species_name, plant_height, stem_width, number_of_leaves, number_of_flowers, number_of_fruits, soil_pH, Ca_concentration) -> trait_data 
   
-view(trait_data) # awesome, fake dataset created!
+tail(trait_data) # awesome, fake dataset created!
 
-skim(trait_data)
+head(trait_data)
 
 summary(trait_data)
 
@@ -168,7 +168,7 @@ for (n in seq(10, nrow(trait_data), by = 5)) {  # Increase sample size by 5 each
   }
 }
 
-print(results) # looks like to actually detect real difference i might want to further increase sample size beyond 30 because there's nothing significant popping up. Hopefully my graphs tell a better narrative of my observations.
+head(results) # looks like to actually detect real difference i might want to further increase sample size beyond 30 because there's nothing significant popping up. Hopefully my graphs tell a better narrative of my observations.
 ```
 
 
@@ -231,7 +231,7 @@ for (n in seq(10, nrow(trait_data), by = 10)) {  # Increase sample size by 10 ea
   }
 }
 
-print(results1) 
+head(results1) 
 ```
 
 

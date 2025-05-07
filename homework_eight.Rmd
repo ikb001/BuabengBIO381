@@ -27,7 +27,7 @@ library(skimr) # for inspecting our data
 data <- read.table("Ghana_Covid19_DailyActive.csv",header=TRUE, sep=",", fill=TRUE, quote="")
 
 str(data) # checking the structure of the dataframe
-skim(data) # inspecting the dataframe
+head(data) # inspecting the dataframe
 summary(data) # inspecting the dataframe
 
 print(data)
@@ -42,7 +42,7 @@ is.na(data)
 #no Nas reported but I will go ahead and omit them anyways
 data <- na.omit(data)
 
-skim(data) # checking again
+head(data) # checking again
 ```
 
  

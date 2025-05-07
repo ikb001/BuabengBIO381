@@ -11,7 +11,7 @@
 
 <meta name="author" content="Isaac Buabeng" />
 
-<meta name="date" content="2025-02-26" />
+<meta name="date" content="2025-05-07" />
 
 <title>fake_datasets_homework</title>
 
@@ -280,7 +280,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">fake_datasets_homework</h1>
 <h4 class="author">Isaac Buabeng</h4>
-<h4 class="date">2025-02-26</h4>
+<h4 class="date">2025-05-07</h4>
 
 </div>
 
@@ -352,12 +352,13 @@ website on rich fens in Vermont</a></p>
 <h1>loading necessary libraries</h1>
 <pre class="r"><code>library(skimr)
 library(tidyverse)</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.4.3</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
+## ✔ purrr     1.0.4     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
@@ -372,281 +373,89 @@ species_name &lt;- c(&quot;Starry campylium&quot;, &quot;Scorpidium revolvens&qu
 
 plant_height &lt;- c(round(rnorm(30, mean=15)))
 
-print(plant_height)</code></pre>
-<pre><code>##  [1] 15 13 16 14 14 17 16 15 16 15 16 16 17 15 14 13 15 15 13 15 15 14 14 15 14
-## [26] 16 16 16 15 14</code></pre>
+head(plant_height)</code></pre>
+<pre><code>## [1] 15 14 16 12 17 16</code></pre>
 <pre class="r"><code>stem_width &lt;- c(runif(30))
-print(stem_width)</code></pre>
-<pre><code>##  [1] 0.28100728 0.93440328 0.82222774 0.07240229 0.41737969 0.90075674
-##  [7] 0.80201923 0.12082624 0.35281072 0.83965886 0.69739285 0.49007923
-## [13] 0.04414660 0.97920091 0.18392634 0.09298427 0.22861106 0.71188001
-## [19] 0.37551254 0.37153156 0.14617333 0.55383641 0.89122724 0.53960237
-## [25] 0.71807039 0.01337633 0.10658419 0.29943843 0.31452851 0.55065740</code></pre>
+head(stem_width)</code></pre>
+<pre><code>## [1] 0.3939316 0.3891992 0.7101352 0.6968955 0.6161045 0.2071937</code></pre>
 <pre class="r"><code>number_of_leaves &lt;- c(round(rnorm(30, mean=15)))
 
-print(number_of_leaves)</code></pre>
-<pre><code>##  [1] 16 15 15 16 15 15 14 14 16 15 14 15 16 16 15 14 17 15 15 15 16 15 14 15 15
-## [26] 15 14 15 15 17</code></pre>
+head(number_of_leaves)</code></pre>
+<pre><code>## [1] 15 15 14 14 14 15</code></pre>
 <pre class="r"><code>number_of_flowers &lt;- c(round(rnorm(30, mean = 5)))
 print(number_of_flowers)</code></pre>
-<pre><code>##  [1] 3 5 5 5 5 7 7 5 5 5 4 4 6 5 5 5 3 5 3 7 5 5 5 5 4 5 5 6 5 5</code></pre>
+<pre><code>##  [1] 4 4 5 4 4 7 6 5 4 4 5 4 4 4 4 5 6 5 7 5 4 4 7 5 3 6 5 6 5 5</code></pre>
 <pre class="r"><code>number_of_fruits &lt;- c(round(rnorm(30, mean=10)))
-print(number_of_fruits)</code></pre>
-<pre><code>##  [1] 10 10 10  9  9 10  8  8  9  8 11  9 11  9  9 10 10  9 10 11  8  8 12 10  9
-## [26] 10  7 10  9 10</code></pre>
+head(number_of_fruits)</code></pre>
+<pre><code>## [1]  9 11 10 10  7 10</code></pre>
 <pre class="r"><code>soil_pH &lt;- c(runif(30, max = 7.8, min = 5.8)) #this is usually the range of pH within rich fen plant communities
-print(soil_pH)</code></pre>
-<pre><code>##  [1] 6.179223 5.924271 6.953491 6.116898 5.991086 7.276564 7.374307 7.671802
-##  [9] 7.070537 7.567088 6.898847 5.983518 6.580458 7.647405 7.555940 7.555285
-## [17] 6.537887 6.743895 7.316962 7.438233 7.182692 7.023356 7.796270 6.453866
-## [25] 6.962816 6.103290 6.184326 7.539018 6.854978 7.322008</code></pre>
+head(soil_pH)</code></pre>
+<pre><code>## [1] 7.397470 7.780719 6.550546 7.763007 7.195810 7.628538</code></pre>
 <pre class="r"><code>Ca_concentration &lt;- c(runif(30))
-print(Ca_concentration)</code></pre>
-<pre><code>##  [1] 0.887074623 0.288292418 0.008934012 0.222280391 0.804271344 0.570927101
-##  [7] 0.691769784 0.998101380 0.734300998 0.971595553 0.605159111 0.777046305
-## [13] 0.725952657 0.675790500 0.504934371 0.063716586 0.670083543 0.782609522
-## [19] 0.684893243 0.875211860 0.347135382 0.985216903 0.959211319 0.892157953
-## [25] 0.727104066 0.165423878 0.121526581 0.511594281 0.411209329 0.326339227</code></pre>
+head(Ca_concentration)</code></pre>
+<pre><code>## [1] 0.88282126 0.57636294 0.96854141 0.17444079 0.04070917 0.77838017</code></pre>
 <pre class="r"><code># make the dataframe
 data.frame(site_id, species_name, plant_height, stem_width, number_of_leaves, number_of_flowers, number_of_fruits, soil_pH, Ca_concentration) -&gt; trait_data 
   
-view(trait_data) # awesome, fake dataset created!
-
-skim(trait_data)</code></pre>
-<table>
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">trait_data</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">30</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">9</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">character</td>
-<td align="left">2</td>
-</tr>
-<tr class="odd">
-<td align="left">numeric</td>
-<td align="left">7</td>
-</tr>
-<tr class="even">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: character</strong></p>
-<table>
-<colgroup>
-<col width="19%" />
-<col width="13%" />
-<col width="19%" />
-<col width="5%" />
-<col width="5%" />
-<col width="8%" />
-<col width="12%" />
-<col width="15%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">min</th>
-<th align="right">max</th>
-<th align="right">empty</th>
-<th align="right">n_unique</th>
-<th align="right">whitespace</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">site_id</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">7</td>
-<td align="right">11</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">species_name</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">11</td>
-<td align="right">36</td>
-<td align="right">0</td>
-<td align="right">22</td>
-<td align="right">0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table style="width:100%;">
-<colgroup>
-<col width="20%" />
-<col width="11%" />
-<col width="15%" />
-<col width="6%" />
-<col width="5%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">plant_height</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">14.97</td>
-<td align="right">1.10</td>
-<td align="right">13.00</td>
-<td align="right">14.00</td>
-<td align="right">15.00</td>
-<td align="right">16.00</td>
-<td align="right">17.00</td>
-<td align="left">▂▆▇▆▂</td>
-</tr>
-<tr class="even">
-<td align="left">stem_width</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.46</td>
-<td align="right">0.31</td>
-<td align="right">0.01</td>
-<td align="right">0.20</td>
-<td align="right">0.40</td>
-<td align="right">0.72</td>
-<td align="right">0.98</td>
-<td align="left">▇▇▅▃▇</td>
-</tr>
-<tr class="odd">
-<td align="left">number_of_leaves</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">15.13</td>
-<td align="right">0.82</td>
-<td align="right">14.00</td>
-<td align="right">15.00</td>
-<td align="right">15.00</td>
-<td align="right">15.75</td>
-<td align="right">17.00</td>
-<td align="left">▃▇▁▃▁</td>
-</tr>
-<tr class="even">
-<td align="left">number_of_flowers</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4.97</td>
-<td align="right">1.00</td>
-<td align="right">3.00</td>
-<td align="right">5.00</td>
-<td align="right">5.00</td>
-<td align="right">5.00</td>
-<td align="right">7.00</td>
-<td align="left">▁▁▇▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">number_of_fruits</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">9.43</td>
-<td align="right">1.10</td>
-<td align="right">7.00</td>
-<td align="right">9.00</td>
-<td align="right">9.50</td>
-<td align="right">10.00</td>
-<td align="right">12.00</td>
-<td align="left">▅▆▇▂▁</td>
-</tr>
-<tr class="even">
-<td align="left">soil_pH</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6.93</td>
-<td align="right">0.59</td>
-<td align="right">5.92</td>
-<td align="right">6.47</td>
-<td align="right">6.99</td>
-<td align="right">7.42</td>
-<td align="right">7.80</td>
-<td align="left">▇▃▆▆▇</td>
-</tr>
-<tr class="odd">
-<td align="left">Ca_concentration</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.60</td>
-<td align="right">0.29</td>
-<td align="right">0.01</td>
-<td align="right">0.36</td>
-<td align="right">0.68</td>
-<td align="right">0.80</td>
-<td align="right">1.00</td>
-<td align="left">▃▃▃▇▆</td>
-</tr>
-</tbody>
-</table>
+tail(trait_data) # awesome, fake dataset created!</code></pre>
+<pre><code>##        site_id                         species_name plant_height stem_width
+## 25     invaded                    Elodium blandowii           15 0.18214660
+## 26 non-invaded                         inland sedge           15 0.37029442
+## 27     removed                         yellow sedge           15 0.74337356
+## 28     invaded                     Malaxis unifolia           16 0.08133323
+## 29 non-invaded Cypripedium parviflorum var. makasin           15 0.21726726
+## 30     removed                     Meesia triquetra           16 0.34459957
+##    number_of_leaves number_of_flowers number_of_fruits  soil_pH
+## 25               16                 3               11 5.885527
+## 26               15                 6               11 7.671114
+## 27               16                 5                9 6.120144
+## 28               15                 6               10 6.647597
+## 29               14                 5               10 6.262084
+## 30               17                 5               10 7.517645
+##    Ca_concentration
+## 25        0.7873418
+## 26        0.5136521
+## 27        0.2371616
+## 28        0.7156504
+## 29        0.7095801
+## 30        0.7528812</code></pre>
+<pre class="r"><code>head(trait_data)</code></pre>
+<pre><code>##       site_id             species_name plant_height stem_width number_of_leaves
+## 1     invaded         Starry campylium           15  0.3939316               15
+## 2 non-invaded     Scorpidium revolvens           14  0.3891992               15
+## 3     removed Calliergonella cuspidata           16  0.7101352               14
+## 4     invaded        Bebris thunbergii           12  0.6968955               14
+## 5 non-invaded      Reynoutria japonica           17  0.6161045               14
+## 6     removed             inland sedge           16  0.2071937               15
+##   number_of_flowers number_of_fruits  soil_pH Ca_concentration
+## 1                 4                9 7.397470       0.88282126
+## 2                 4               11 7.780719       0.57636294
+## 3                 5               10 6.550546       0.96854141
+## 4                 4               10 7.763007       0.17444079
+## 5                 4                7 7.195810       0.04070917
+## 6                 7               10 7.628538       0.77838017</code></pre>
 <pre class="r"><code>summary(trait_data)</code></pre>
 <pre><code>##    site_id          species_name        plant_height     stem_width     
-##  Length:30          Length:30          Min.   :13.00   Min.   :0.01338  
-##  Class :character   Class :character   1st Qu.:14.00   1st Qu.:0.19510  
-##  Mode  :character   Mode  :character   Median :15.00   Median :0.39645  
-##                                        Mean   :14.97   Mean   :0.46174  
-##                                        3rd Qu.:16.00   3rd Qu.:0.71652  
-##                                        Max.   :17.00   Max.   :0.97920  
+##  Length:30          Length:30          Min.   :12.00   Min.   :0.08133  
+##  Class :character   Class :character   1st Qu.:14.25   1st Qu.:0.24604  
+##  Mode  :character   Mode  :character   Median :15.00   Median :0.49727  
+##                                        Mean   :15.07   Mean   :0.49661  
+##                                        3rd Qu.:16.00   3rd Qu.:0.70683  
+##                                        Max.   :17.00   Max.   :0.94602  
 ##  number_of_leaves number_of_flowers number_of_fruits    soil_pH     
-##  Min.   :14.00    Min.   :3.000     Min.   : 7.000   Min.   :5.924  
-##  1st Qu.:15.00    1st Qu.:5.000     1st Qu.: 9.000   1st Qu.:6.475  
-##  Median :15.00    Median :5.000     Median : 9.500   Median :6.993  
-##  Mean   :15.13    Mean   :4.967     Mean   : 9.433   Mean   :6.927  
-##  3rd Qu.:15.75    3rd Qu.:5.000     3rd Qu.:10.000   3rd Qu.:7.422  
-##  Max.   :17.00    Max.   :7.000     Max.   :12.000   Max.   :7.796  
-##  Ca_concentration  
-##  Min.   :0.008934  
-##  1st Qu.:0.363154  
-##  Median :0.680342  
-##  Mean   :0.599662  
-##  3rd Qu.:0.798856  
-##  Max.   :0.998101</code></pre>
+##  Min.   :12       Min.   :3.000     Min.   : 7.000   Min.   :5.861  
+##  1st Qu.:14       1st Qu.:4.000     1st Qu.: 9.000   1st Qu.:6.389  
+##  Median :15       Median :5.000     Median :10.000   Median :7.221  
+##  Mean   :15       Mean   :4.867     Mean   : 9.767   Mean   :6.962  
+##  3rd Qu.:16       3rd Qu.:5.000     3rd Qu.:10.000   3rd Qu.:7.466  
+##  Max.   :18       Max.   :7.000     Max.   :13.000   Max.   :7.781  
+##  Ca_concentration 
+##  Min.   :0.04071  
+##  1st Qu.:0.39019  
+##  Median :0.63070  
+##  Mean   :0.59357  
+##  3rd Qu.:0.78510  
+##  Max.   :0.99429</code></pre>
 <pre class="r"><code># make a presence and absence column for the invasive species
 trait_data$invasive_presence &lt;- ifelse(trait_data$species_name %in% c(&quot;Bebris thunbergii&quot;, &quot;Reynoutria japonica&quot;), 1, 0)</code></pre>
 </div>
@@ -674,7 +483,7 @@ class="section level1">
 
 summary(manova) #looks like our box plots deceived us after all and our hypothesis may not be correct after all, plant traits are similar across sites regardless of the presence of invasives (p&gt;0.1899).</code></pre>
 <pre><code>##           Df  Pillai approx F num Df den Df Pr(&gt;F)
-## site_id    2 0.23105  0.62695     10     48 0.7834
+## site_id    2 0.36861   1.0846     10     48 0.3925
 ## Residuals 27</code></pre>
 </div>
 <div
@@ -692,19 +501,21 @@ summary(mod1)</code></pre>
 ##     data = trait_data)
 ## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)        0.489282   1.476732   0.331    0.743
-## plant_height      -0.071671   0.059240  -1.210    0.238
-## stem_width        -0.141534   0.201682  -0.702    0.490
-## number_of_leaves   0.038001   0.076623   0.496    0.624
-## number_of_flowers  0.046880   0.067560   0.694    0.494
-## number_of_fruits  -0.006273   0.054882  -0.114    0.910
+##                   Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)        3.87008    1.42472   2.716   0.0120 *
+## plant_height      -0.06470    0.06067  -1.066   0.2969  
+## stem_width        -0.06856    0.22460  -0.305   0.7628  
+## number_of_leaves  -0.08869    0.04124  -2.151   0.0418 *
+## number_of_flowers -0.07641    0.05756  -1.328   0.1968  
+## number_of_fruits  -0.10843    0.04898  -2.214   0.0366 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 0.1035038)
+## (Dispersion parameter for gaussian family taken to be 0.08274497)
 ## 
 ##     Null deviance: 2.7000  on 29  degrees of freedom
-## Residual deviance: 2.4841  on 24  degrees of freedom
-## AIC: 24.398
+## Residual deviance: 1.9859  on 24  degrees of freedom
+## AIC: 17.682
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
 <pre class="r"><code>plot(mod1)</code></pre>
@@ -747,39 +558,20 @@ for (n in seq(10, nrow(trait_data), by = 5)) {  # Increase sample size by 5 each
                                          effect_size = effect_size, p_value = p_value))
   }
 }</code></pre>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
 <pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 ## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<pre class="r"><code>print(results) # looks like to actually detect real difference i might want to further increase sample size beyond 30 because there&#39;s nothing significant popping up. Hopefully my graphs tell a better narrative of my observations.</code></pre>
-<pre><code>##                    sample_size             trait  effect_size   p_value
-## plant_height                10      plant_height  -18.5332267 0.9972969
-## stem_width                  10        stem_width    1.6086051 0.8763597
-## number_of_leaves            10  number_of_leaves  -10.4848255 0.9999998
-## number_of_flowers           10 number_of_flowers    9.3813917 0.9972634
-## number_of_fruits            10  number_of_fruits   -0.4527097 0.7396533
-## plant_height1               15      plant_height  -80.8796463 0.9994660
-## stem_width1                 15        stem_width -250.0291975 0.9998209
-## number_of_leaves1           15  number_of_leaves   30.8753950 0.9999580
-## number_of_flowers1          15 number_of_flowers   74.6277971 0.9995312
-## number_of_fruits1           15  number_of_fruits   11.4362910 0.9999389
-## plant_height2               20      plant_height  -26.4745363 0.9995847
-## stem_width2                 20        stem_width -164.1496877 0.9993961
-## number_of_leaves2           20  number_of_leaves   26.3623151 0.9995585
-## number_of_flowers2          20 number_of_flowers   14.6976330 0.9999190
-## number_of_fruits2           20  number_of_fruits    6.5331718 0.9998921
-## plant_height3               25      plant_height  -50.1627082 0.9971155
-## stem_width3                 25        stem_width   -1.0098463 0.8648878
-## number_of_leaves3           25  number_of_leaves   -0.2616747 0.9037458
-## number_of_flowers3          25 number_of_flowers   17.2768117 0.9975784
-## number_of_fruits3           25  number_of_fruits  -48.7532383 0.9971966
-## plant_height4               30      plant_height   -1.7187274 0.2805717
-## stem_width4                 30        stem_width   -8.6949963 0.1907439
-## number_of_leaves4           30  number_of_leaves    2.0421660 0.1790735
-## number_of_flowers4          30 number_of_flowers    1.7117770 0.4268387
-## number_of_fruits4           30  number_of_fruits   -1.7046172 0.2392787</code></pre>
+<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre class="r"><code>head(results) # looks like to actually detect real difference i might want to further increase sample size beyond 30 because there&#39;s nothing significant popping up. Hopefully my graphs tell a better narrative of my observations.</code></pre>
+<pre><code>##                   sample_size             trait effect_size   p_value
+## plant_height               10      plant_height    6.962197 0.9999117
+## stem_width                 10        stem_width  -14.387934 0.9999817
+## number_of_leaves           10  number_of_leaves   -7.901939 0.9999121
+## number_of_flowers          10 number_of_flowers  -18.538820 0.9999281
+## number_of_fruits           10  number_of_fruits   -7.525686 0.9999113
+## plant_height1              15      plant_height    7.823246 0.9999332</code></pre>
 </div>
 <div
 id="visualize-the-effects-of-sample-size-on-statistical-significance-for-all-traits"
@@ -842,38 +634,17 @@ for (n in seq(10, nrow(trait_data), by = 10)) {  # Increase sample size by 10 ea
                                          effect_size = effect_size1, p_value = p_value1))
   }
 }</code></pre>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
 <pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 ## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<pre class="r"><code>print(results1) </code></pre>
-<pre><code>##                    sample_size             trait  effect_size   p_value
-## plant_height                10      plant_height  -18.5332267 0.9972969
-## stem_width                  10        stem_width    1.6086051 0.8763597
-## number_of_leaves            10  number_of_leaves  -10.4848255 0.9999998
-## number_of_flowers           10 number_of_flowers    9.3813917 0.9972634
-## number_of_fruits            10  number_of_fruits   -0.4527097 0.7396533
-## plant_height1               15      plant_height  -80.8796463 0.9994660
-## stem_width1                 15        stem_width -250.0291975 0.9998209
-## number_of_leaves1           15  number_of_leaves   30.8753950 0.9999580
-## number_of_flowers1          15 number_of_flowers   74.6277971 0.9995312
-## number_of_fruits1           15  number_of_fruits   11.4362910 0.9999389
-## plant_height2               20      plant_height  -26.4745363 0.9995847
-## stem_width2                 20        stem_width -164.1496877 0.9993961
-## number_of_leaves2           20  number_of_leaves   26.3623151 0.9995585
-## number_of_flowers2          20 number_of_flowers   14.6976330 0.9999190
-## number_of_fruits2           20  number_of_fruits    6.5331718 0.9998921
-## plant_height3               25      plant_height  -50.1627082 0.9971155
-## stem_width3                 25        stem_width   -1.0098463 0.8648878
-## number_of_leaves3           25  number_of_leaves   -0.2616747 0.9037458
-## number_of_flowers3          25 number_of_flowers   17.2768117 0.9975784
-## number_of_fruits3           25  number_of_fruits  -48.7532383 0.9971966
-## plant_height4               30      plant_height   -1.7187274 0.2805717
-## stem_width4                 30        stem_width   -8.6949963 0.1907439
-## number_of_leaves4           30  number_of_leaves    2.0421660 0.1790735
-## number_of_flowers4          30 number_of_flowers    1.7117770 0.4268387
-## number_of_fruits4           30  number_of_fruits   -1.7046172 0.2392787
-## number_of_fruits5           30  number_of_fruits  -39.8042697 0.9982792</code></pre>
+<pre class="r"><code>head(results1) </code></pre>
+<pre><code>##                   sample_size             trait effect_size   p_value
+## plant_height               10      plant_height    6.962197 0.9999117
+## stem_width                 10        stem_width  -14.387934 0.9999817
+## number_of_leaves           10  number_of_leaves   -7.901939 0.9999121
+## number_of_flowers          10 number_of_flowers  -18.538820 0.9999281
+## number_of_fruits           10  number_of_fruits   -7.525686 0.9999113
+## plant_height1              15      plant_height    7.823246 0.9999332</code></pre>
 </div>
 <div
 id="visualize-the-effects-of-sample-size-on-statistical-significance-for-all-traits-1"

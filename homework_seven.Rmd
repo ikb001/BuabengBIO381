@@ -22,7 +22,7 @@ library(tidyverse)
 ```{r}
 data("iris")
 
-skim(iris)
+summary(iris)
 
 # There are 5 variables with 150 observations
 ```
@@ -36,7 +36,7 @@ iris1 <- iris %>%
   filter(Sepal.Length > 6,
          Sepal.Width > 2.5)
   
-skim(iris1)
+summary(iris1)
 # My df has 5 variables with 56 observations
 ```
 
@@ -46,7 +46,7 @@ skim(iris1)
 iris2 <- iris1 %>%
   select(Species, Sepal.Length, Sepal.Width)
 
-skim(iris2)
+summary(iris2)
 
 # My df has 3 variables with 56 observations
 ```
@@ -66,7 +66,9 @@ head(iris3)
 iris4 <- iris3 %>%
   mutate(Sepal.Area = Sepal.Length * Sepal.Width)
 
-skim(iris4)
+head(iris4)
+
+summary(iris4)
 # my df has 4 variables with 56 observations
 ```
 
@@ -76,7 +78,7 @@ skim(iris4)
 iris5 <- data.frame(average.sepal.length = mean(iris4$Sepal.Length),
           average.sepal.width = mean(iris4$Sepal.Width), 
           sample.size = nrow(iris4)) 
-print(iris5)
+head(iris5)
 ```
 
 
@@ -104,7 +106,7 @@ irisFinal <- iris %>%
           average.sepal.width = mean(Sepal.Width), 
           sample.size = n())
 
-print(irisFinal)
+summary(irisFinal)
 ```
 
 # Create a ‘longer’ data frame using the original iris data set with three columns named “Species”, “Measure”, “Value”. The column “Species” will retain the species names of the data set. The column “Measure” will include whether the value corresponds to Sepal.Length, Sepal.Width, Petal.Length, or Petal.Width and the column “Value” will include the numerical values of those measurements.
@@ -112,6 +114,6 @@ print(irisFinal)
 iris_longer <- iris %>%
   pivot_longer(!c(Species),names_to = "Measure",  values_to = "value")
 
-print(iris_longer)
+summary(iris_longer)
 ```
 

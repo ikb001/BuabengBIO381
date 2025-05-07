@@ -22,19 +22,19 @@ print(n_dims)
 
 #create a vector of consecutive integers from 1:n_dims^2
 vec <- c(1:n_dims ^ 2)
-print(vec)
+head(vec)
 
 # randomly sample to reshuffle the values in the new vector
 shuffled_vec <- sample(vec)
 
 # creating a square matrix with the shuffled elements
 shuf_matrix <- matrix(shuffled_vec, nrow = n_dims, ncol=n_dims)
-print(shuf_matrix)
+head(shuf_matrix)
 
 # transposinng the matrix
 trns_matrix <- t(shuf_matrix)
 
-print(trns_matrix)
+head(trns_matrix)
 
 nrow(trns_matrix)
 
@@ -48,7 +48,7 @@ mean(trns_matrix[9,])
 # using the eigen function on my matrix
 eigen_output <- eigen(trns_matrix)
 
-print(eigen_output) #looks like we generated a bunch of characteristic roots
+head(eigen_output) #looks like we generated a bunch of characteristic roots
 
 # digging in to find out  the actual types of numbers generated
 typeof(eigen_output$values)
@@ -59,11 +59,11 @@ typeof(eigen_output$vectors) #They are all complex numbers of latent roots
 ```{r matrices and dataframes 2}
 # a 4 x 4 matrix filled with random uniform values
 my_matrix <- matrix(data=runif(16), nrow=4, ncol=4)
-print(my_matrix)
+head(my_matrix)
 
 # a 100-element vector of TRUE or FALSE values
 my_logical <- sample(c(TRUE, FALSE), size = 100, replace = TRUE)
-print(my_logical)
+head(my_logical)
 
 # a 26-element vector of all the lower-case letters in random order
 my_letters <- sample(letters, size = 26, replace = FALSE)
@@ -88,12 +88,12 @@ my_letters <- sample(LETTERS, size = 26, replace = FALSE)
 
 my_df <- data.frame(my_unis, my_letters)
 
-print(my_df)
+head(my_df)
 
 #selecting four random rows and replacing them with NAs in my df
 my_df$my_unis <- replace(my_df$my_unis, list=sample(my_df$my_unis, size = 4), values=NA)
 
-print(my_df)
+head(my_df)
 
 # identifying the portions of the first variable with missing spots
 which(is.na(my_df$my_unis))
@@ -103,6 +103,6 @@ my_df[order(my_df$my_letters),]
 
 #calculating the mean of the first variable
 d <- mean(my_df$my_unis, na.rm = TRUE)
-print(d)
+head(d)
 ```
 

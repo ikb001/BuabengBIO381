@@ -11,7 +11,7 @@
 
 <meta name="author" content="Isaac Buabeng" />
 
-<meta name="date" content="2025-02-12" />
+<meta name="date" content="2025-05-07" />
 
 <title>homework_five</title>
 
@@ -280,7 +280,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">homework_five</h1>
 <h4 class="author">Isaac Buabeng</h4>
-<h4 class="date">2025-02-12</h4>
+<h4 class="date">2025-05-07</h4>
 
 </div>
 
@@ -297,41 +297,32 @@ print(n_dims)</code></pre>
 <pre><code>## [1] 9</code></pre>
 <pre class="r"><code>#create a vector of consecutive integers from 1:n_dims^2
 vec &lt;- c(1:n_dims ^ 2)
-print(vec)</code></pre>
-<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
-## [26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50
-## [51] 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75
-## [76] 76 77 78 79 80 81</code></pre>
+head(vec)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6</code></pre>
 <pre class="r"><code># randomly sample to reshuffle the values in the new vector
 shuffled_vec &lt;- sample(vec)
 
 # creating a square matrix with the shuffled elements
 shuf_matrix &lt;- matrix(shuffled_vec, nrow = n_dims, ncol=n_dims)
-print(shuf_matrix)</code></pre>
-<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
-##  [1,]   79   69   17   68   38   33   16   37   30
-##  [2,]   51   57   75   66   73   47   20   19   61
-##  [3,]   14    9   39   41   34   44    6    2    1
-##  [4,]   67   26   53   10   29   21   11    4   76
-##  [5,]   42    7   12   23    5   58   40   55   65
-##  [6,]   50   77   15   27    8   60   22   52   24
-##  [7,]   43   70   32   54   59   46   48   62   80
-##  [8,]   81   36   78   49   13   72   35    3   56
-##  [9,]   25   74   45   71   18   28   63   31   64</code></pre>
+head(shuf_matrix)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## [1,]   79   69   17   68   38   33   16   37   30
+## [2,]   51   57   75   66   73   47   20   19   61
+## [3,]   14    9   39   41   34   44    6    2    1
+## [4,]   67   26   53   10   29   21   11    4   76
+## [5,]   42    7   12   23    5   58   40   55   65
+## [6,]   50   77   15   27    8   60   22   52   24</code></pre>
 <pre class="r"><code># transposinng the matrix
 trns_matrix &lt;- t(shuf_matrix)
 
-print(trns_matrix)</code></pre>
-<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
-##  [1,]   79   51   14   67   42   50   43   81   25
-##  [2,]   69   57    9   26    7   77   70   36   74
-##  [3,]   17   75   39   53   12   15   32   78   45
-##  [4,]   68   66   41   10   23   27   54   49   71
-##  [5,]   38   73   34   29    5    8   59   13   18
-##  [6,]   33   47   44   21   58   60   46   72   28
-##  [7,]   16   20    6   11   40   22   48   35   63
-##  [8,]   37   19    2    4   55   52   62    3   31
-##  [9,]   30   61    1   76   65   24   80   56   64</code></pre>
+head(trns_matrix)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## [1,]   79   51   14   67   42   50   43   81   25
+## [2,]   69   57    9   26    7   77   70   36   74
+## [3,]   17   75   39   53   12   15   32   78   45
+## [4,]   68   66   41   10   23   27   54   49   71
+## [5,]   38   73   34   29    5    8   59   13   18
+## [6,]   33   47   44   21   58   60   46   72   28</code></pre>
 <pre class="r"><code>nrow(trns_matrix)</code></pre>
 <pre><code>## [1] 9</code></pre>
 <pre class="r"><code># calculating the sum and means of elements in the first and last rows
@@ -346,9 +337,8 @@ sum(trns_matrix[1,] )</code></pre>
 <pre class="r"><code># using the eigen function on my matrix
 eigen_output &lt;- eigen(trns_matrix)
 
-print(eigen_output) #looks like we generated a bunch of characteristic roots</code></pre>
-<pre><code>## eigen() decomposition
-## $values
+head(eigen_output) #looks like we generated a bunch of characteristic roots</code></pre>
+<pre><code>## $values
 ## [1] 366.849540+ 0.000000i -65.760156+ 0.000000i  52.937905+ 9.156369i
 ## [4]  52.937905- 9.156369i -10.070124+51.982021i -10.070124-51.982021i
 ## [7] -20.974240+ 0.000000i  -6.170663+ 0.000000i   5.319955+ 0.000000i
@@ -394,7 +384,7 @@ typeof(eigen_output$values)</code></pre>
 <h1>Question 2</h1>
 <pre class="r"><code># a 4 x 4 matrix filled with random uniform values
 my_matrix &lt;- matrix(data=runif(16), nrow=4, ncol=4)
-print(my_matrix)</code></pre>
+head(my_matrix)</code></pre>
 <pre><code>##            [,1]      [,2]      [,3]      [,4]
 ## [1,] 0.30122890 0.1422943 0.4045103 0.2197676
 ## [2,] 0.06072057 0.5492847 0.6478935 0.3694889
@@ -402,16 +392,8 @@ print(my_matrix)</code></pre>
 ## [4,] 0.72059627 0.5854834 0.3077200 0.1542023</code></pre>
 <pre class="r"><code># a 100-element vector of TRUE or FALSE values
 my_logical &lt;- sample(c(TRUE, FALSE), size = 100, replace = TRUE)
-print(my_logical)</code></pre>
-<pre><code>##   [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [13]  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE
-##  [25] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
-##  [37] FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
-##  [49]  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
-##  [61]  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE
-##  [73] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-##  [85]  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
-##  [97]  TRUE FALSE FALSE  TRUE</code></pre>
+head(my_logical)</code></pre>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
 <pre class="r"><code># a 26-element vector of all the lower-case letters in random order
 my_letters &lt;- sample(letters, size = 26, replace = FALSE)
 print(my_letters)</code></pre>
@@ -439,65 +421,25 @@ my_letters &lt;- sample(LETTERS, size = 26, replace = FALSE)
 
 my_df &lt;- data.frame(my_unis, my_letters)
 
-print(my_df)</code></pre>
-<pre><code>##       my_unis my_letters
-## 1  8.68106807          Z
-## 2  9.25707956          T
-## 3  8.81977559          X
-## 4  6.74186843          I
-## 5  9.50166979          W
-## 6  5.16444894          E
-## 7  5.76519021          N
-## 8  3.36331206          Y
-## 9  3.47324631          F
-## 10 0.20024301          A
-## 11 5.02813046          J
-## 12 8.71043414          P
-## 13 0.06300784          Q
-## 14 0.72057124          O
-## 15 1.64211225          S
-## 16 7.70334074          M
-## 17 7.35184306          U
-## 18 9.71875636          G
-## 19 4.66472377          D
-## 20 0.74384513          K
-## 21 6.48818124          B
-## 22 7.58593170          L
-## 23 1.37106081          H
-## 24 3.96584595          R
-## 25 2.24985329          C
-## 26 0.57958561          V</code></pre>
+head(my_df)</code></pre>
+<pre><code>##    my_unis my_letters
+## 1 8.681068          Z
+## 2 9.257080          T
+## 3 8.819776          X
+## 4 6.741868          I
+## 5 9.501670          W
+## 6 5.164449          E</code></pre>
 <pre class="r"><code>#selecting four random rows and replacing them with NAs in my df
 my_df$my_unis &lt;- replace(my_df$my_unis, list=sample(my_df$my_unis, size = 4), values=NA)
 
-print(my_df)</code></pre>
-<pre><code>##       my_unis my_letters
-## 1  8.68106807          Z
-## 2  9.25707956          T
-## 3  8.81977559          X
-## 4  6.74186843          I
-## 5  9.50166979          W
-## 6  5.16444894          E
-## 7          NA          N
-## 8          NA          Y
-## 9          NA          F
-## 10 0.20024301          A
-## 11 5.02813046          J
-## 12 8.71043414          P
-## 13 0.06300784          Q
-## 14 0.72057124          O
-## 15 1.64211225          S
-## 16 7.70334074          M
-## 17 7.35184306          U
-## 18 9.71875636          G
-## 19 4.66472377          D
-## 20 0.74384513          K
-## 21 6.48818124          B
-## 22 7.58593170          L
-## 23 1.37106081          H
-## 24 3.96584595          R
-## 25 2.24985329          C
-## 26 0.57958561          V</code></pre>
+head(my_df)</code></pre>
+<pre><code>##    my_unis my_letters
+## 1 8.681068          Z
+## 2 9.257080          T
+## 3 8.819776          X
+## 4 6.741868          I
+## 5 9.501670          W
+## 6 5.164449          E</code></pre>
 <pre class="r"><code># identifying the portions of the first variable with missing spots
 which(is.na(my_df$my_unis))</code></pre>
 <pre><code>## [1] 7 8 9</code></pre>
@@ -532,7 +474,7 @@ my_df[order(my_df$my_letters),]</code></pre>
 ## 1  8.68106807          Z</code></pre>
 <pre class="r"><code>#calculating the mean of the first variable
 d &lt;- mean(my_df$my_unis, na.rm = TRUE)
-print(d)</code></pre>
+head(d)</code></pre>
 <pre><code>## [1] 5.084929</code></pre>
 </div>
 
